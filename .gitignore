@@ -1,1 +1,23 @@
 # gitignore
+
+# === C++ Build Artifacts ===
+*.o
+*.obj
+*.out
+*.exe
+*.bin
+build/
+cmake-build-debug/
+cmake-build-release/
+.vscode/
+.idea/
+
+# === TypeScript / Node Modules ===
+node_modules/
+dist/
+out/
+.env
+.env.local
+*.log
+.DS_Store
+
