@@ -5,90 +5,89 @@
 The system shall simulate read/write to memory addresses.
 
 ## FR-2: Support Multiple Cache Types
-The simulator shall support: 
+``The simulator shall support: 
 - Direct-mapped cache
 - Set-associative cache
-- Fully associative cache.
+- Fully associative cache.``
 
 ## FR-3: Configureable Cache Parameters
-Users shall configure: 
+``Users shall configure: 
 - Cache size
 - block size
 - Associativity
-- Replacement policy
+- Replacement policy``
 
 ## FR-4: Replacement Policies
-The system shall support:
+``The system shall support:
 - LRU
 - FIFO
-- Random replacement.
+- Random replacement.``
 
 ## FR-5: Hit/Miss Detection
-The simulator shall determine:
+``The simulator shall determine:
 - Cache hits,
 - Cache misses,
 - Compulsory misses,
 - Conflict misses,
-- Capacity misses (advanced).
+- Capacity misses (advanced).``
 
 ## FR-6: Performance Metrics
-The system shall display:
+``The system shall display:
 - Hit rate,
 - Miss rate,
 - Total accesses,
 - Average access time,
-- Eviction count.
+- Eviction count.``
 
 ## FR-7: Step-by-Step Visualization
-Users shall visualize:
+``Users shall visualize:
 - Block placement,
 - Evictions,
 - Address mapping,
-- Cache state transitions.
+- Cache state transitions.``
 
 ## FR-8: Import Memory Traces
-Users shall upload:
+``Users shall upload:
 - Text trace files,
-- Address sequences.
+- Address sequences.``
 
 ## FR-9: Reset Simulation
-Users shall reset cache state and rerun simulations.
+``Users shall reset cache state and rerun simulations.``
 
 ## FR-10: Export Results
-Users shall export:
+``Users shall export:
 - Metrics,
 - Logs,
-- Simulation summaries.
+- Simulation summaries.``
 
 --
 
 # Non-Functional Requirements:
 ## 1. Performance
 ### NFR-1
-The simulator should process large traces efficiently.
+``The simulator should process large traces efficiently.
 Target:
 
-100,000+ accesses with low latency
-
+100,000+ accesses with low latency``
 
 ## 2. Scalability
 ### NFR-2
-The architecture should allow new:
+``The architecture should allow new:
 - Cache policies,
 - Memory hierarchies,
-- Visualization modules without major rewrites.
+- Visualization modules without major rewrites.``
 
 ## 3. Maintainability
 ### NFR-3
-The system should follow modular architecture:
+``The system should follow modular architecture:
 - Simulation engine,
 - API layer,
 - Visualization layer,
-- Utilities.
+- Utilities.``
 
 ## 4. Reliability
 ### NFR-4
-The system should avoid:
+``The system should avoid:
 - Memory leaks
 - Invalid accesses
 - Crashes
@@ -96,33 +95,34 @@ Use:
 - RAII,
 - Smart pointers
 - Sanitizers
-- Unit tests
+- Unit tests``
 
 ## 5. Usability
 ### NFR-5
-The frontend should provide intuitive controls and clear visual feedback.
+``The frontend should provide intuitive controls and clear visual feedback.``
 
 ## 6. Portability
 ### NFR-6
-The backend should compile on:
+``The backend should compile on:
 - macOS
 - Linux
-- Windows
+- Windows``
 
 ## 7. Observability
 ### NFR-7
-The backend should provide:
+``The backend should provide:
 - Logs
 - Metrics
-- Debugging traces
+- Debugging traces``
 
 ## 8. Testability
 ### NFR-8
-Core simulation logic should be unit-testable independently from UI.
+``Core simulation logic should be unit-testable independently from UI.``
 
 --
 
 # CacheScope File Structure
+```text
 cache-scope/
 │
 |———— frontend/
@@ -202,3 +202,4 @@ cache-scope/
 ├── .gitignore
 ├── README.md
 └── LICENSE
+```
