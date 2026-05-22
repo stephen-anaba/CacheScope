@@ -1,4 +1,4 @@
-## Non-Functional Requirements
+## Requirements
 
 | ID                  | Core Functional Requirements                                      | ID       | Low Level Core Requirements                                             |
 | :---                | :---                                                              | :---     | :---                                                                    |
