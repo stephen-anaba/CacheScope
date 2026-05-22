@@ -5,46 +5,58 @@
 The system shall simulate read/write to memory addresses.
 
 ## FR-2: Support Multiple Cache Types
-``The simulator shall support: 
+```
+The simulator shall support: 
 - Direct-mapped cache
 - Set-associative cache
-- Fully associative cache.``
+- Fully associative cache.
+```
 
 ## FR-3: Configureable Cache Parameters
-``Users shall configure: 
+```
+Users shall configure: 
 - Cache size
 - block size
 - Associativity
-- Replacement policy``
+- Replacement policy
+```
 
 ## FR-4: Replacement Policies
-``The system shall support:
+```
+The system shall support:
 - LRU
 - FIFO
-- Random replacement.``
+- Random replacement
+```
 
 ## FR-5: Hit/Miss Detection
-``The simulator shall determine:
+```
+The simulator shall determine:
 - Cache hits,
 - Cache misses,
 - Compulsory misses,
 - Conflict misses,
-- Capacity misses (advanced).``
+- Capacity misses (advanced)
+```
 
 ## FR-6: Performance Metrics
-``The system shall display:
+```
+The system shall display:
 - Hit rate,
 - Miss rate,
 - Total accesses,
 - Average access time,
-- Eviction count.``
+- Eviction count
+```
 
 ## FR-7: Step-by-Step Visualization
-``Users shall visualize:
+```
+Users shall visualize:
 - Block placement,
 - Evictions,
 - Address mapping,
-- Cache state transitions.``
+- Cache state transitions
+```
 
 ## FR-8: Import Memory Traces
 ``Users shall upload:
