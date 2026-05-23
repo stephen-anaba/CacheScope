@@ -1,3 +1,22 @@
+# Architecture & Requirements Specification
+
+## 1. Core Functional Requirements (CFR)
+- **CFR-1 (Cache Config):** The system must accept user-defined cache sizes, associativity, and block sizes.
+- **CFR-2 (Address Mapping):** The system must accurately compute tags, indexes, and offsets.
+
+## 2. Component Low-Level Functional Requirements (CLFR)
+### 2.1 Cache Configuration (US-1.1.x)
+- [ ] CLFR-1.1.1: Cache sizes must be powers of 2 (minimum 1KB, maximum 64KB).
+
+## 3. Use Case Traceability Matrix
+
+
+| Requirement ID | Component / Task ID | Target Use Case | Verification Status |
+| :--- | :--- | :--- | :--- |
+| CFR-1 | US-1.1.1 / US-1.1.2 | UC-01: Initialize Cache | ⏳ Pending |
+| CFR-2 | US-1.2.1 | UC-02: Map Memory Address| ⏳ Pending |
+
+
 
 ## Requirements
 
