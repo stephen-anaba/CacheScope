@@ -80,12 +80,14 @@
 
 ## Part 1: The Configuration Parameter Table
 
-| Parameter ID | Attribute Name     | Date Type   | Default Value | Constraints                                                  |
-| :---         | :---               | :---        | :---          |
-| CFG-01       | cache_size         | Integer     | 32 KB         | Must be a power of 2 (                                       | KB ≤ X ≤ 1 KB ) |
-| CFG-02       | block_size         | Integer     | 64 Bytes      | Must be a power of 2 ( 4 Bytes ≤ X ≤ 1 KB )                  |
-| CFG-03       | associativity      | Integer     | 4 (4-way)     | Must be a power of 2 (1 ≤ X ≤ 64) or 0 for Fully Associative |
-| CFG-04       | replacement_policy | String/Enum | "LRU"         | Options: LRU, FIFO, LFU, Random                              |
+
+| Parameter ID | Attribute Name | Data Type | Default Value | Constraints |
+| :--- | :--- | :--- | :--- | :--- |
+| **CFG-01** | `cache_size` | Integer | 32 KB | Must be a power of 2 ( 1 KB ≤ X ≤ 64 MB ) |
+| **CFG-02** | `block_size` | Integer | 64 Bytes | Must be a power of 2 ( 4 Bytes ≤ X ≤ 1 KB ) |
+| **CFG-03** | `associativity` | Integer | 4 (4-way) | Must be a power of 2 (1 ≤ X ≤ 64) or 0 for Fully Associative |
+| **CFG-04** | `replacement_policy` | String/Enum | "LRU" | Options: LRU, FIFO, LFU, Random |
+
 
 ## Part 2: Functional Requirements
 ```text
