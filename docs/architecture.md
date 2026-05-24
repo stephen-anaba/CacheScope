@@ -1,7 +1,7 @@
 # Core Use Case (UC)
 
 | ID     | Use Case               |
-| :---:  | :---:                  |
+| :---   | :---                   |
 | CUC-1  | Configure Cache        |
 | CUC-2  | Submit Memory Address  |
 | CUC-3  | Update Cache State     |
@@ -40,41 +40,100 @@
 | CFR-1 | US-1.1.1 / US-1.1.2 | UC-01: Initialize Cache | ... Pending |
 | CFR-2 | US-1.2.1 | UC-02: Map Memory Address| ... Pending |
 
---
+---
 
 ## Requirements
 
-| ID                  | Core Functional Requirements                                      | ID       | Low Level Core Requirements                                             |
-| :---                | :---                                                              | :---     | :---                                                                    |
-| **Cache Simulation**    |                                                                   |          |                                                                         |
-| CFR-1               | The system shall simulate cache memory access                     | CLFR-1.1 | The system shall process sequential memory access requests              |
-|                     |                                                                   | CLFR-1.2 | The system shall update cache state after each access                   |
-|                     |                                                                   | CLFR-1.3 | The system shall maintain deterministic simulation execution            |
-| **Cache Configuration**    |                                                                   |          |                                                                         |
-| CFR-2               | The system shall support configurable cache parameters            | CLFR-2.1 | The system shall support configurable cache sizes                       |
-|                     |                                                                   | CLFR-2.2 | The system shall support configurable block sizes                       |
-|                     |                                                                   | CLFR-2.3 | The system shall support configurable associativity levels              |
-| **Address Trans.**  |                                                                   |          |                                                                         |
-| CFR-3               | The system shall determine cache hits and cache misses            | CLFR-3.1 | The system shall accept hexadecimal memory addresses                    |
-|                     |                                                                   | CLFR-3.2 | The system shall decompose addresses into tag, index, and offset fields |
-|                     |                                                                   | CLFR-3.3 | The system shall visualize binary address decomposition                 |
-| **Hit/Miss Res.**   |                                                                   |          |                                                                         |
-| CFR-4               | The system shall apply cache replacement policies during eviction | CLFR-4.1 | The system shall search cache sets for matching tags                    |
-|                     |                                                                   | CLFR-4.2 | The system shall classify accesses as hits or misses                    |
-|                     |                                                                   | CLFR-4.3 | The system shall update cache metadata after each access                |
-| **Repl. Policies**  |                                                                   |          |                                                                         |
-| CFR-5               | The system shall handle cache replacement mechanics               | CLFR-5.1 | The system shall support Least Recently Used (LRU) eviction             |
-|                     |                                                                   | CLFR-5.2 | The system shall support First-In First-Out (FIFO) eviction             |
-|                     |                                                                   | CLFR-5.3 | The system shall replace cache lines during misses when sets are full   |
-| **Visualization**   |                                                                   |          |                                                                         |
-| CFR-6               | The system shall visually render cache state changes              | CLFR-6.1 | The system shall render cache-line states visually                      |
-|                     |                                                                   | CLFR-6.2 | The system shall highlight cache hits and misses                        |
-|                     |                                                                   | CLFR-6.3 | The system shall animate cache evictions                                |
-| **Cache Analytics** |                                                                   |          |                                                                         |
-| CFR-7               | The system shall display cache analytics in real time             | CLFR-7.1 | The system shall calculate cache hit rates                              |
-|                     |                                                                   | CLFR-7.2 | The system shall calculate cache miss rates                             |
-|                     |                                                                   | CLFR-7.3 | The system shall display real-time simulation metrics                   |
+| ID                      | Core Functional Requirements                                      | ID       | Low Level Core Requirements                                             |
+| :---                    | :---                                                              | :---     | :---                                                                    |
+|                         | **Cache Simulation**                                              |          |                                                                         |
+| CFR-1                   | The system shall simulate cache memory access                     | CLFR-1.1 | The system shall process sequential memory access requests              |
+|                         |                                                                   | CLFR-1.2 | The system shall update cache state after each access                   |
+|                         |                                                                   | CLFR-1.3 | The system shall maintain deterministic simulation execution            |
+| **Cache Configuration** |                                                                   |          |                                                                         |
+| CFR-2                   | The system shall support configurable cache parameters            | CLFR-2.1 | The system shall support configurable cache sizes                       |
+|                         |                                                                   | CLFR-2.2 | The system shall support configurable block sizes                       |
+|                         |                                                                   | CLFR-2.3 | The system shall support configurable associativity levels              |
+| **Address Trans.**      |                                                                   |          |                                                                         |
+| CFR-3                   | The system shall determine cache hits and cache misses            | CLFR-3.1 | The system shall accept hexadecimal memory addresses                    |
+|                         |                                                                   | CLFR-3.2 | The system shall decompose addresses into tag, index, and offset fields |
+|                         |                                                                   | CLFR-3.3 | The system shall visualize binary address decomposition                 |
+| **Hit/Miss Res.**       |                                                                   |          |                                                                         |
+| CFR-4                   | The system shall apply cache replacement policies during eviction | CLFR-4.1 | The system shall search cache sets for matching tags                    |
+|                         |                                                                   | CLFR-4.2 | The system shall classify accesses as hits or misses                    |
+|                         |                                                                   | CLFR-4.3 | The system shall update cache metadata after each access                |
+| **Repl. Policies**      |                                                                   |          |                                                                         |
+| CFR-5                   | The system shall handle cache replacement mechanics               | CLFR-5.1 | The system shall support Least Recently Used (LRU) eviction             |
+|                         |                                                                   | CLFR-5.2 | The system shall support First-In First-Out (FIFO) eviction             |
+|                         |                                                                   | CLFR-5.3 | The system shall replace cache lines during misses when sets are full   |
+| **Visualization**       |                                                                   |          |                                                                         |
+| CFR-6                   | The system shall visually render cache state changes              | CLFR-6.1 | The system shall render cache-line states visually                      |
+|                         |                                                                   | CLFR-6.2 | The system shall highlight cache hits and misses                        |
+|                         |                                                                   | CLFR-6.3 | The system shall animate cache evictions                                |
+| **Cache Analytics**     |                                                                   |          |                                                                         |
+| CFR-7                   | The system shall display cache analytics in real time             | CLFR-7.1 | The system shall calculate cache hit rates                              |
+|                         |                                                                   | CLFR-7.2 | The system shall calculate cache miss rates                             |
+|                         |                                                                   | CLFR-7.3 | The system shall display real-time simulation metrics                   |
 
+---
+
+# 1. Cache Configuration Requirements
+```
+text
+Key:
+• CFR = Cache Functional Requrements
+• CLFR = Cache Low-Level Functional Requirement
+• UC = Use Case
+```
+
+## User Story Statement
+### US 1.1: Define cache Configuration Requirements
+### User Story Statement
+```
+text
+As a user, I want to configure cache parameters, to that I can simulate and analyze different chace behaviors.
+```
+### Overview
+```
+text
+This user story defines the configurable properties of the cache simulation engine, including cache size, associativity, block size, replacement policies, and write strategies.
+```
+### Functional Requirements Table
+
+| ID    | Requirement                            | Priority |
+| :---  | :---                                   | :---     |
+| FR-01 | User can configure cache size          | High     |
+| FR-02 | User can configure block size          | High     |
+| FR-03 | User can configure associativity       | High     |
+| FR-04 | User can select replacement policy     | Medium   |
+| FR-05 | User can select write policy           | Medium   |
+| FR-06 | System validates invalid configuration | High     |
+
+
+## Configuration Parameters Table
+
+| Parameter          | Description           | Example Values |
+| :---               | :---                  | :---           |
+| Cache Size         | Total cache capacity  | `32KB, 64KB`   |
+| Block Size         | Bytes per cache line  | `16B, 64B`     |
+| Associativity      | Number of ways        | `1-way, 4-way` |
+| Replacement Policy | Eviction strategy     | LRU, FIFO      |
+| Write Policy       | Memory write behavior | Write-back     |
+
+## Validation Rules
+
+| Rule ID | Validation Rule                            |
+| :---    | :---                                       |
+| VF-01   | Cache size must be divisible by block size |
+| VR-02   | Associativity must be a power of 2         |
+| VR-03   | Number of sets must be an integer          |
+
+## Acceptance Criteria
+- User can successfully configure all required cache parameters
+- Invalid cache configurations are rejected
+- System displays configuration summary before simulation
+
+---
 
 # CacheScope File Structure
 ```text
