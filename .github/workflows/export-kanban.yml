@@ -1,0 +1,45 @@
+name: Export Kanban Board to Markdown
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  export-board:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Fetch and Format GitHub Project Data
+        env:
+          GH_TOKEN: ${{ secrets.PROJECT_ACCESS_TOKEN }}
+          PROJECT_NUMBER: 3
+          OWNER: "stephen-anaba" 
+        run: |
+          echo "# Project Kanban Board Status" > BOARD_STATUS.md
+          echo "Generated automatically on $(date)" >> BOARD_STATUS.md
+          echo "" >> BOARD_STATUS.md
+
+          gh project item-list $PROJECT_NUMBER --owner $OWNER --format json > project_data.json
+
+          echo "## 📋 To Do" >> BOARD_STATUS.md
+          jq -r '.items[] | select(.status == "Todo") | "* [ ] \(.title)"' project_data.json >> BOARD_STATUS.md
+
+          echo -e "\n## 🚧 In Progress" >> BOARD_STATUS.md
+          jq -r '.items[] | select(.status == "In Progress") | "* [ ] \(.title)"' project_data.json >> BOARD_STATUS.md
+
+          echo -e "\n## ✅ Done" >> BOARD_STATUS.md
+          jq -r '.items[] | select(.status == "Done") | "* [x] \(.title)"' project_data.json >> BOARD_STATUS.md
+
+          rm project_data.json
+
+      - name: Commit and Push Board Document
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@://github.com'
+          git add BOARD_STATUS.md
+          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: auto-update project board status matrix" && git push)
+
