@@ -76,36 +76,64 @@
 |                         |                                                                   | CLFR-7.3 | The system shall display real-time simulation metrics                   |
 
 ---
-#  US 1.1: Define cache Configuration Requirements
 
-## Part 1: The Configuration Parameter Table
-
-
-| Parameter ID | Attribute Name | Data Type | Default Value | Constraints |
-| :--- | :--- | :--- | :--- | :--- |
-| **CFG-01** | `cache_size` | Integer | 32 KB | Must be a power of 2 ( 1 KB ≤ X ≤ 64 MB ) |
-| **CFG-02** | `block_size` | Integer | 64 Bytes | Must be a power of 2 ( 4 Bytes ≤ X ≤ 1 KB ) |
-| **CFG-03** | `associativity` | Integer | 4 (4-way) | Must be a power of 2 (1 ≤ X ≤ 64) or 0 for Fully Associative |
-| **CFG-04** | `replacement_policy` | String/Enum | "LRU" | Options: LRU, FIFO, LFU, Random |
-
-
-## Part 2: Functional Requirements
-```text
-1. Power-of-Two Enforcement: The system must validate that cache_size, block_size, and associativity conform to  mathematical validation before initializing simulation structures.
-
-2. Dependent Dimension Validation: The system must verify that total cache_size is greater than or equal to the selected block_size.
-
-3. Total Block Calculation: The system must dynamically compute the total number of blocks using the formula: 
+# 1. Cache Configuration Requirements
 ```
-$$ \text{Total Blocks} = \frac{\text{Cache Size}}{\text{Block Size}} $$
+text
+Key:
+• CFR = Cache Functional Requrements
+• CLFR = Cache Low-Level Functional Requirement
+• UC = Use Case
+```
 
-| Parameter ID | Attribute Name       | Data Type   | Default Value | Constraints                                                  |
-| :---         | :---                 | :---        | :---          | :---                                                         |
-| **CFG-01**   | `cache_size`         | Integer     | 32 KB         | Must be a power of 2 ( 1 KB ≤ X ≤ 64 MB )                    |
-| **CFG-02**   | `block_size`         | Integer     | 64 Bytes      | Must be a power of 2 ( 4 Bytes ≤ X ≤ 1 KB )                  |
-| **CFG-03**   | `associativity`      | Integer     | 4 (4-way)     | Must be a power of 2 (1 ≤ X ≤ 64) or 0 for Fully Associative |
-| **CFG-04**   | `replacement_policy` | String/Enum | "LRU"         | Options: LRU, FIFO, LFU, Random                              |
+## User Story Statement
+### US 1.1: Define cache Configuration Requirements
+### User Story Statement
+```
+text
+As a user, I want to configure cache parameters, to that I can simulate and analyze different chace behaviors.
+```
+### Overview
+```
+text
+This user story defines the configurable properties of the cache simulation engine, including cache size, associativity, block size, replacement policies, and write strategies.
+```
+### Functional Requirements Table
 
+| ID    | Requirement                            | Priority |
+| :---  | :---                                   | :---     |
+| FR-01 | User can configure cache size          | High     |
+| FR-02 | User can configure block size          | High     |
+| FR-03 | User can configure associativity       | High     |
+| FR-04 | User can select replacement policy     | Medium   |
+| FR-05 | User can select write policy           | Medium   |
+| FR-06 | System validates invalid configuration | High     |
+
+
+## Configuration Parameters Table
+
+| Parameter          | Description           | Example Values |
+| :---               | :---                  | :---           |
+| Cache Size         | Total cache capacity  | `32KB, 64KB`   |
+| Block Size         | Bytes per cache line  | `16B, 64B`     |
+| Associativity      | Number of ways        | `1-way, 4-way` |
+| Replacement Policy | Eviction strategy     | LRU, FIFO      |
+| Write Policy       | Memory write behavior | Write-back     |
+
+## Validation Rules
+
+| Rule ID | Validation Rule                            |
+| :---    | :---                                       |
+| VF-01   | Cache size must be divisible by block size |
+| VR-02   | Associativity must be a power of 2         |
+| VR-03   | Number of sets must be an integer          |
+
+## Acceptance Criteria
+- User can successfully configure all required cache parameters
+- Invalid cache configurations are rejected
+- System displays configuration summary before simulation
+
+---
 
 # CacheScope File Structure
 ```text
