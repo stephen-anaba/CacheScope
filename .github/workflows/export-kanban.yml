@@ -1,3 +1,4 @@
+---
 name: Export Kanban Board to Markdown
 
 on:
@@ -21,7 +22,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.PROJECT_ACCESS_TOKEN }}
           PROJECT_NUMBER: 3
-          OWNER: "stephen-anaba" 
+          OWNER: "stephen-anaba"
         run: |
           echo "# Project Kanban Board Status" > BOARD_STATUS.md
           echo "Generated automatically on $(date)" >> BOARD_STATUS.md
