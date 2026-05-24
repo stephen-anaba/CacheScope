@@ -8,7 +8,7 @@ on:
 
 permissions:
   contents: write
-  projects: read
+    projects: read
 
 jobs:
   export-board:
