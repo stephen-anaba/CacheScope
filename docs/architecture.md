@@ -95,9 +95,9 @@
 
 2. Dependent Dimension Validation: The system must verify that total cache_size is greater than or equal to the selected block_size.
 
-3. Total Block Calculation: The system must dynamically compute the total number of blocks using the formula:
-    \(\text{Total\ Blocks}=\frac{\text{Cache\ Size}}{\text{Block\ Size}}\).
+3. Total Block Calculation: The system must dynamically compute the total number of blocks using the formula: 
 ```
+$$ \text{Total Blocks} = \frac{\text{Cache Size}}{\text{Block Size}} $$
 
 | Parameter ID | Attribute Name       | Data Type   | Default Value | Constraints                                                  |
 | :---         | :---                 | :---        | :---          | :---                                                         |
