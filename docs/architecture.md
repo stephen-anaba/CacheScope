@@ -1,13 +1,56 @@
+# Core Use Case (UC)
+
+| ID     | Use Case               |
+| :---:  | :---:                  |
+| CUC-1  | Configure Cache        |
+| CUC-2  | Submit Memory Address  |
+| CUC-3  | Update Cache State     |
+| CUC-4  | Input Address          |
+| CUC-5  | Translate Address      |
+| CUC-6  | Visualize Address Bits |
+| CUC-7  | Search Cache Set       |
+| CUC-8  | Detect Cache Hit       |
+| CUC-9  | Detect Cache Miss      |
+| CUC-10 | Execute LRU Eviction   |
+| CUC-11 | Execute FIFO Eviction  |
+| CUC-12 | Replace Cache Line     |
+| CUC-13 | Render Cache State     |
+| CUC-14 | Highlight Cache Events |
+| CUC-15 | Animate Evictions      |
+| CUC-16 | Calculate Hit Rate     |
+| CUC-17 | Calculate Miss Rate    |
+| CUC-18 | Display Live Metrics   |
+
+--
+
+# Architecture & Requirements Specification
+
+## 1. Core Functional Requirements (CFR)
+- **CFR-1 (Cache Config):** The system must accept user-defined cache sizes, associativity, and block sizes.
+- **CFR-2 (Address Mapping):** The system must accurately compute tags, indexes, and offsets.
+
+## 2. Component Low-Level Functional Requirements (CLFR)
+### 2.1 Cache Configuration (US-1.1.x)
+- [ ] CLFR-1.1.1: Cache sizes must be powers of 2 (minimum 1KB, maximum 64KB).
+
+## 3. Use Case Traceability Matrix
+
+| Requirement ID | Component / Task ID | Target Use Case | Verification Status |
+| :--- | :--- | :--- | :--- |
+| CFR-1 | US-1.1.1 / US-1.1.2 | UC-01: Initialize Cache | ... Pending |
+| CFR-2 | US-1.2.1 | UC-02: Map Memory Address| ... Pending |
+
+--
 
 ## Requirements
 
 | ID                  | Core Functional Requirements                                      | ID       | Low Level Core Requirements                                             |
 | :---                | :---                                                              | :---     | :---                                                                    |
-| **Cache Access**    |                                                                   |          |                                                                         |
+| **Cache Simulation**    |                                                                   |          |                                                                         |
 | CFR-1               | The system shall simulate cache memory access                     | CLFR-1.1 | The system shall process sequential memory access requests              |
 |                     |                                                                   | CLFR-1.2 | The system shall update cache state after each access                   |
 |                     |                                                                   | CLFR-1.3 | The system shall maintain deterministic simulation execution            |
-| **Cache Config**    |                                                                   |          |                                                                         |
+| **Cache Configuration**    |                                                                   |          |                                                                         |
 | CFR-2               | The system shall support configurable cache parameters            | CLFR-2.1 | The system shall support configurable cache sizes                       |
 |                     |                                                                   | CLFR-2.2 | The system shall support configurable block sizes                       |
 |                     |                                                                   | CLFR-2.3 | The system shall support configurable associativity levels              |
