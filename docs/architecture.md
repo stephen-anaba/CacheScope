@@ -20,8 +20,8 @@
 | CUC-16 | Calculate Hit Rate     |
 | CUC-17 | Calculate Miss Rate    |
 | CUC-18 | Display Live Metrics   |
+| :---   | :---                   |
 
---
 
 # Architecture & Requirements Specification
 
@@ -75,7 +75,6 @@
 |                     |                                                                   | CLFR-7.2 | The system shall calculate cache miss rates                             |
 |                     |                                                                   | CLFR-7.3 | The system shall display real-time simulation metrics                   |
 
---
 
 # CacheScope File Structure
 ```text
