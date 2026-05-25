@@ -1,12 +1,12 @@
 # Project Kanban Board Status
-Generated automatically on Sun May 24 18:45:08 UTC 2026
+Generated automatically on Mon May 25 05:24:07 UTC 2026
 
 ## 📋 To Do
-* [ ] US-1.2 — Define Address Mapping Requirements
-* [ ] US-1.3: Define Cache Resolution Requirements
-* [ ] US-1.4 — Define Replacement Policy Requirements
-* [ ] US-1.5 — Define Visualization Requirements
-* [ ] US-1.6 — Define Analytics Requirements Overview
+* [ ] US-1.2 — Define Memory Address Mapping Requirements
+* [ ] US-1.3 — Define Cache Lookup and Resolution Requirements
+* [ ] US-1.4 — Define Replacement Policy & Eviction Requirements
+* [ ] US-1.5 — Define Visualization & Runtime Feedback Requirements
+* [ ] US-1.6 — Define Metrics & Analytics Requirements
 * [ ] US-2.1 — Create Cache Configuration Use Cases
 * [ ] US-2.2 — Create Address Processing Use Cases
 * [ ] US-2.3 — Create Cache Resolution Use Cases
