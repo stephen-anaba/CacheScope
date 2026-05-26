@@ -218,7 +218,7 @@ As a computer architecture student, I want to input and visualize memory addre
 ## Functional Requirements (CFR)
 
 | ID     | Requirement                                                                                          |
-| :---:   | :------:                                                                                             |
+| :---:   | :---:                                                                                             |
 | CFR-01 | The system shall allow users to input hexadecimal memory address                                     |
 | CFR-02 | The system shall convert hexadecimal adresses into binary representation                             |
 | CFR-03 | The system shall decompose memory addresses into tag, index, and offset components                   |
@@ -232,7 +232,7 @@ As a computer architecture student, I want to input and visualize memory addre
 ## Low-Level Functional Requirements (CLFR)
 
 | ID      | Requirement                                                                                             |
-| :---:   | :------:                                                                                                |
+| :---:   | :---:                                                                                                |
 | CLFR-01 | Address input shall supprt hexadecimal notation using standard prefixes and formats                     |
 | CLFR-02 | Address input shall reject unsupported into binary representation before decomposition                  |
 | CLFR-03 | Hexdecimal addresses shall be converted into binary representation before decomposition                 |
@@ -250,6 +250,11 @@ As a computer architecture student, I want to input and visualize memory addre
 
 
 ## Non-Functional Requirements (CNFR)
+
+| Header 1 | Header 2 |
+|:--------:|:--------:|
+| Left     | Left     |
+| Short    | Long text item |
 
 
 ## Configuration Parameters
