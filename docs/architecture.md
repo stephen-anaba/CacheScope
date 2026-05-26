@@ -22,8 +22,9 @@
 | CUC-18 | Display Live Metrics   |
 | :---   | :---                   |
 
+--- 
 
-# Architecture & Requirements Specification
+# US 1.1: Define Cache Configuration Requirments
 
 ## 1. Core Functional Requirements (CFR)
 - **CFR-1 (Cache Config):** The system must accept user-defined cache sizes, associativity, and block sizes.
