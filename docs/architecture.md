@@ -181,8 +181,93 @@ $$ \text{Lines} = \frac{\text{Cache Size}}{\text{Block Size}} $$
 * Foundational inputs for future UML and GRASP artifacts
 
 ---
+# US 1.2: Define Memory Address Mapping Requirements
+
+## Requirements
+
+### Overview
+Define the functional and non-functional requirements for memory-address parsing, decomposition, validation, and visualization to support accurate cache mapping simulation and deterministic address interpretation within CacheScope.
+
+### These requirements establish the foundation for:
+* address parsing logic
+* tag/index/offset decomposition
+* binary address visualization
+* cache-set mapping
+* address validation
+* future address-analysis tooling
+
+## User Story
+As a computer architecture student, I want to input and visualize memory addresses, so that I can understand how addresses map into cache structures and influence cache behavior.
+
+## Scope
+### This user story covers:
+* hexadecimal memory-address input
+* binary address conversion
+* tag/index/offset decomposition
+* address validation
+* address-width compatibility
+* address visualization requirements
+* traceability mappings
+
+### This user story does not yet cover:
+* cache-hit/miss execution
+* runtime cache replacement
+* visualization rendering implementation
+* advanced memory hierarchy modeling
+
+## Functional Requirements (CFR)
+
+| ID     | Requirement                                                                                          |
+| :---   | :------:                                                                                             |
+| CFR-01 | The system shall allow users to input hexadecimal memory address                                     |
+| CFR-02 | The system shall convert hexadecimal adresses into binary representation                             |
+| CFR-03 | The system shall decompose memory addresses into tag, index, and offset components                   |
+| CFR-04 | The system shall visually represent address decomposition resuts                                     |
+| CFR-05 | The system shall validate invalid memory-address inputs before simulation execution                  |
+| CFR-06 | The system shall support configurable address widths                                                 |
+| CFR-07 | The system shall supprt deterministic address decomposition behavior                                 |
+| CFR-08 | The system shall support extensible address-processing structures for future architectural expansion |
 
 
+## Low-Level Functional Requirements (CLFR)
+
+
+## Non-Functional Requirements (CNFR)
+
+
+## Configuration Parameters
+
+
+## Validation Rules
+## Derived Calculation
+## Cache Lines
+## Constraints
+## Use Cases
+## CFR -> CLFR -> Use Case Traceability
+## Acceptance Criteria
+## Technical Notes
+## Deliverables
+
+---
+
+## Low-Level Functional Requirements (CLFR)
+
+
+## Non-Functional Requirements (CNFR)
+
+
+## Configuration Parameters
+
+
+## Validation Rules
+## Derived Calculation
+## Cache Lines
+## Constraints
+## Use Cases
+## CFR -> CLFR -> Use Case Traceability
+## Acceptance Criteria
+## Technical Notes
+## Deliverables
 
 ---
 
