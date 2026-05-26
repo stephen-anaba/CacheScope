@@ -218,7 +218,7 @@ As a computer architecture student, I want to input and visualize memory addre
 ## Functional Requirements (CFR)
 
 | ID     | Requirement                                                                                          |
-| :---   | :------:                                                                                             |
+| :---:   | :------:                                                                                             |
 | CFR-01 | The system shall allow users to input hexadecimal memory address                                     |
 | CFR-02 | The system shall convert hexadecimal adresses into binary representation                             |
 | CFR-03 | The system shall decompose memory addresses into tag, index, and offset components                   |
@@ -230,6 +230,23 @@ As a computer architecture student, I want to input and visualize memory addre
 
 
 ## Low-Level Functional Requirements (CLFR)
+
+| ID      | Requirement                                                                                             |
+| :---:   | :------:                                                                                                |
+| CLFR-01 | Address input shall supprt hexadecimal notation using standard prefixes and formats                     |
+| CLFR-02 | Address input shall reject unsupported into binary representation before decomposition                  |
+| CLFR-03 | Hexdecimal addresses shall be converted into binary representation before decomposition                 |
+| CLFR-04 | Binary conversion shall preserve address-width consistency                                              |
+| CLFR-05 | Address decomposition shall calculate tag bits using cache configuration parameters                     |
+| CLFR-06 | Address decomposition shall calculate index bits using cache configuration parameters                   |
+| CLFR-07 | Address decomposition shall calculate offset bits using cache configuration parameters                  |
+| CLFR-08 | Binary visualization shall visually distinguish tag, index, and offset regions                          |
+| CLFR-09 | Address visualization shall remain synchronized with cache configuration changes                        |
+| CLFR-10 | Invalid address inputs shall prevent siulation execution                                                |
+| CLFR-11 | Invalid address inputs shall generate descriptive validation feedback                                   |
+| CLFR-12 | The system shall support both 32-bit and 64-bit address widths                                          |
+| CLFR-13 | Address decomposition shall remain deterministic for repeated identical inputs                          |
+| CLFR-14 | Address-processing structures shall support future extensibility for advanced address-analysis features |
 
 
 ## Non-Functional Requirements (CNFR)
