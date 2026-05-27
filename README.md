@@ -1,94 +1,69 @@
 # CacheScope
 
-CacheScope is a modular cache simulation and visualization platform built with C++ and TypeScript for exploring CPU cache behavior, memory-access patterns, and replacement-policy performance.
+CacheScope is an interactive CPU cache simulation and visualization platform designed to help students, educators, and systems programmers better understand cache architecture, memory mapping, and runtime cache behavior.
 
-The project combines systems programming, data-structure engineering, and interactive visualization to make cache architecture easier to understand and analyze.
+The project combines computer architecture concepts with formal software engineering practices, including requirements-driven development, UML modeling, GRASP-based design, and modular simulation architecture.
 
 ---
 
-# Features
+## Features
 
-## Core Cache Simulation
+### Cache Configuration
 - Configurable cache size
-- Configurable associativity
 - Configurable block size
-- Configurable replacement policies
-- Real-time memory-access simulation
+- Direct-mapped, set-associative, and fully associative cache support
+- Replacement policies:
+  - LRU
+  - FIFO
+- Validation for invalid cache configurations
 
-## Address Mapping
+### Address Mapping & Visualization
 - Hexadecimal memory-address input
-- Tag/index/offset decomposition
+- Tag / Index / Offset decomposition
 - Binary address visualization
+- Cache-set mapping simulation
 
-## Cache Resolution
-- Cache hit detection
-- Cache miss detection
-- Set-associative lookup simulation
-- Cache-line replacement handling
+### Cache Simulation
+- Cache-hit and cache-miss detection
+- Deterministic cache lookup behavior
+- Cache-line eviction simulation
+- Runtime cache-state updates
 
-## Replacement Policies
-- LRU (Least Recently Used)
-- FIFO (First-In First-Out)
-- Extensible replacement-policy architecture
-
-## Visualization
-- Interactive cache-grid rendering
+### Visualization & Feedback
+- Cache-grid visualization
 - Hit/miss highlighting
 - Eviction visualization
-- Simulation event logging
+- Runtime simulation logs
 
-## Analytics
-- Real-time hit-rate metrics
-- Real-time miss-rate metrics
-- Simulation performance statistics
-
----
-
-# Architecture
-
-CacheScope follows a layered modular-monolith architecture with strong subsystem separation.
-
-```text
-Frontend (Presentation Layer)
-        ↓
-Backend API Layer
-        ↓
-Simulation/Application Layer
-        ↓
-Cache Domain Layer
-        ↓
-Infrastructure/Data Structure Layer
-```
-
-The architecture emphasizes:
-- high cohesion
-- low coupling
-- modularity
-- extensibility
-- systems-oriented design
+### Metrics & Analytics
+- Hit-rate calculation
+- Miss-rate calculation
+- Live simulation metrics
+- Cache-efficiency analytics
 
 ---
 
-# Tech Stack
+## Software Engineering & Architecture
 
-## Backend
-- C++
-- CMake
-- Custom HashSet implementation
-- REST API architecture
+CacheScope is intentionally being developed using an architecture-first workflow.
 
-## Frontend
-- TypeScript
-- Vite
-- Web Components
-- CSS
+The project includes:
+- Functional and non-functional requirements
+- CFR → CLFR → Use Case traceability
+- System Sequence Diagrams (SSDs)
+- UML Sequence Diagrams
+- Design Class Diagrams
+- GRASP responsibility analysis
+- Modular subsystem design
+
+This project emphasizes maintainability, extensibility, and educational clarity.
 
 ---
 
-# Project Structure
+## Project Structure
 
-```text
-cache-scope/
+```txt
+CacheScope/
 │
 ├── frontend/
 │   ├── src/
@@ -111,117 +86,89 @@ cache-scope/
 │
 └── README.md
 ```
+## Planned Architecture
+```txt
+CacheScope follows a layered modular-monolith architecture with strong subsystem separation.
 
----
-
-# Systems Engineering Concepts
-
-CacheScope demonstrates several systems and software-engineering concepts:
-
-- cache architecture simulation
-- address translation
-- set-associative caches
-- replacement policies
-- modular layered architecture
-- reusable data structures
-- performance-oriented design
-- Agile incremental development
-- GRASP principles
-- domain-oriented decomposition
-
----
-
-# Custom HashSet
-
-CacheScope includes a reusable custom HashSet implementation designed to support fast cache-tag lookup operations.
-
-This enables:
-- scalable cache-set access
-- reduced lookup overhead
-- cleaner simulation-domain separation
-- reusable infrastructure components
-
----
-
-# Example Simulation Flow
-
-```text
-User Input
-    ↓
-Address Translation
-    ↓
-Cache Set Lookup
-    ↓
-Hit/Miss Resolution
-    ↓
-Replacement Policy
-    ↓
-Visualization Update
-    ↓
-Metrics Update
+Frontend (Presentation Layer)
+        ↓
+Backend API Layer
+        ↓
+Simulation/Application Layer
+        ↓
+Cache Domain Layer
+        ↓
+Infrastructure/Data Structure Layer
 ```
 
----
+### Core Subsystems
+- Cache Engine
+- Address Mapper
+- Replacement Policy Engine
+- Metrics Engine
+- Visualization Layer
 
-# Getting Started
+### Design Principles
+- Low Coupling
+- High Cohesion
+- Strategy Pattern for replacement policies
+- Separation of simulation and visualization concerns
 
-## Backend
+## Tech Stack (current/planned)
+### Frontend
+- TypeScript
+- Vite
+- Web Components
+- HTML/CSS
+- SVG/Canvas Visualization
 
-```bash
-cd backend
+### Backend
+- C++
+- CMake
+- Custom hashSet implementation
+- REST API architecture
+- GitHub Actions
+- Markdown-based architecture documentation
 
-mkdir build
-cd build
+### Software Engineering Practices
+- Agile Development
+- Requirements-Driven Design
+- UML Modeling
+- GRASP Principles
+- Traceability Mapping
 
-cmake ..
-make
+## Educational Goals
+CacheScope aims to make CPU cache behavior more understandable through:
+- interactive simulation
+- visual learning
+- deterministic execution
+- architecture-level transparency
 
-./cache_scope
-```
+The platform is designed to bridge the gap between theoretical computer architecture and practical systems understanding.
 
-## Frontend
+## Roadmap
+### Phase 1
+- Requirements engineering
+- Use cases
+- UML & GRASP modeling
 
-```bash
-cd frontend
+### Phase 2
+- Core cache simulation engine
+- Address decomposition
+- Replacement-policy execution
 
-npm install
-npm run dev
-```
+### Phase 3
+- Interactive visualization
+- Metrics & analytics
+- Runtime feedback systems
 
----
+### Phase 4
+- Advanced cache architectures
+- Multi-level cache support
+- Export/reporting capabilities
 
-# Roadmap
+## Status
+Currently in active architecture and requirements-design phase.
 
-## Current
-- Core cache simulation
-- Address mapping
-- LRU/FIFO support
-- Visualization system
-- Metrics engine
-
-## Planned
-- LFU and Random replacement policies
-- Multi-level cache simulation
-- Benchmark trace imports
-- Performance profiling
-- Advanced analytics
-- Exportable simulation reports
-
----
-
-# Why This Project?
-
-CacheScope was designed to bridge low-level systems concepts with interactive visualization.
-
-The goal is to create a platform that demonstrates:
-- practical systems programming
-- scalable software architecture
-- data-structure engineering
-- frontend/backend integration
-- performance-focused application design
-
----
-
-# License
-
-MIT License
+## Author
+Built publicly as part of a software engineering and systems architecture learning journey.
