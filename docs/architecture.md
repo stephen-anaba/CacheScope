@@ -58,7 +58,7 @@ As a computer architecture student, I want to configure cache parameters, so tha
 
 ## Functional Requirements (CFR)
 
-| ID     | Requirement                                                                                       | Priority |
+| **ID**     | **Requirement**                                                                                       | **Priority** |
 | :---   | :---                                                                                              | :---     |
 | CFR-01 | The sytem shall allow users to configure cache size                                              | High     |
 | CFR-02 | The system shall allow users to configure cache associatiity                                      | High     |
@@ -70,7 +70,7 @@ As a computer architecture student, I want to configure cache parameters, so tha
 
 ## Low-Level Functional Requirements (CLFR)
 
-| ID      | Requirement                                                                          | Parent CFR |
+| **ID**      | **Requirement**                                                                          | **Parent CFR** |
 | :---    | :---                                                                                 | :---       |
 | CLFR-01 | Cache size shall support KB and MB input formats                                     | CFR-01     |
 | CLFR-02 | Cache size shall be stored internally in bytes                                       | CFR-01     |
@@ -89,7 +89,7 @@ As a computer architecture student, I want to configure cache parameters, so tha
 
 ## Non-Functional Requirements (CNFR)
 
-| ID      | Requirement                                                                                                                    |
+| **ID**      | **Requirement**                                                                                                                    |
 | :---    | :---                                                                                                                           |
 | CNFR-01 | Cache configuration validation shall complete within 100ms under standard input conditions                                     |
 | CNFR-02 | Cache configuration structures shall support future extensibility without requiring major system redesign                    |
@@ -99,7 +99,7 @@ As a computer architecture student, I want to configure cache parameters, so tha
 
 ## Configuration Parameters
 
-| Parameter          | Description                    | Example Values      |
+| **Parameter**          | **Description**                    | **Example Values**      |
 | :---               | :---                           | :---                |
 | Cache Size         | Total cache storage capacity   | 16KB, 32KB, 64KB    |
 | Block Size         | Number of bytes per cache line | 16B, 32B, 64B       |
@@ -109,7 +109,7 @@ As a computer architecture student, I want to configure cache parameters, so tha
 
 ## Validation Rules
 
-| ID    | Rule                                                   |
+| **ID**    | **Rule**                                                   |
 | :---  | :---                                                   |
 | VR-01 | Cache size must be divisible by block size             |
 | VR-02 | Associativity must be greater than zero                |
@@ -130,7 +130,7 @@ $$ \text{Lines} = \frac{\text{Cache Size}}{\text{Block Size}} $$
 
 ## Constraints
 
-| ID     | Constraint                                                                                                                |
+| **ID**     | **Constraint**                                                                                                                |
 | :---   | :---                                                                                                                      |
 | CON-01 | Only valid cache configurations may enter simulation execusion                                                           |
 | CON-02 | Replacement policies must remain implementation-independent at the requirements stage                                     |
@@ -139,14 +139,14 @@ $$ \text{Lines} = \frac{\text{Cache Size}}{\text{Block Size}} $$
 
 ## Use Cases
 
-| Use Case ID | Use Case                     |
+| **Use Case ID** | **Use Case**                     |
 | :---        | :---                         |
 | UC-01       | Configure Cache              |
 | UC-02       | Validate Cache Configuration |
 
 ## CFR -> CLFR -> Use Case Traceability
 
-| CFR    | CLFR                      | Use Case                           |
+| **CFR**    | **CLFR**                      | **Use Case**                           |
 | :---   | :---                      | :---                               |
 | CFR-01 | CLFR-01, CLFR-02          | UC-01 Configure Cache              |
 | CFR-02 | CLFR-03, CLFR-04, CLFR-05 | UC-01 Configure Cache              |
@@ -217,7 +217,7 @@ As a computer architecture student, I want to input and visualize memory addre
 
 ## Functional Requirements (CFR)
 
-| ID     | Requirement                                                                                          |
+| **ID**     | **Requirement**                                                                                          |
 | :---   | :---                                                                                                 |
 | CFR-01 | The system shall allow users to input hexadecimal memory address                                     |
 | CFR-02 | The system shall convert hexadecimal adresses into binary representation                             |
@@ -231,7 +231,7 @@ As a computer architecture student, I want to input and visualize memory addre
 
 ## Low-Level Functional Requirements (CLFR)
 
-| ID      | Requirement                                                                                             |
+| **ID**      | **Requirement**                                                                                             |
 | :---    | :---                                                                                                    |
 | CLFR-01 | Address input shall supprt hexadecimal notation using standard prefixes and formats                     |
 | CLFR-02 | Address input shall reject unsupported into binary representation before decomposition                  |
@@ -251,7 +251,7 @@ As a computer architecture student, I want to input and visualize memory addre
 
 ## Non-Functional Requirements (CNFR)
 
-| ID      | Requirement                                                                                                           |
+| **ID**      | **Requirement**                                                                                                           |
 | :---    | :---                                                                                                                  |
 | CNFR-01 | Address decomposition calculations shall complete within 100ms under standard simulation conditions                   |
 | CNFR-02 | Address-processing logic shall remain modular and independent from visualization rendering logic                      |
@@ -277,7 +277,7 @@ $$ \text{Sets} = \frac{\text{Cache Size}}{\text{Block Size x Associativity}} $$
 
 ## Validation Rules
 
-| ID    | Rule                                                                                 |
+| **ID**    | **Rule**                                                                                 |
 | :---  | :---                                                                                 |
 | VR-02 | Address input must contain only valid hexadecimal characters                         |
 | VR-02 | Address width must match configured architecture contraints                          |
@@ -287,7 +287,7 @@ $$ \text{Sets} = \frac{\text{Cache Size}}{\text{Block Size x Associativity}} $$
 
 ## Constraints
 
-| ID     | Constraint                                                                             |
+| **ID**     | **Constraint**                                                                             |
 | :---   | :---                                                                                   |
 | CON-01 | Address decomposition logic must remain independent from visualization rendering logic |
 | CON-02 | Address-processing workflows must reamin compatible with future cache architectures    |
@@ -296,7 +296,7 @@ $$ \text{Sets} = \frac{\text{Cache Size}}{\text{Block Size x Associativity}} $$
 
 ## Use Cases
 
-| Use Case ID | Use Case               |
+| **Use Case ID** | **Use Case**               |
 | :---        | :---                   |
 | UC-03       | Input Memory Address   |
 | UC-04       | Translate Address      |
@@ -305,7 +305,7 @@ $$ \text{Sets} = \frac{\text{Cache Size}}{\text{Block Size x Associativity}} $$
 
 ## CFR → CLFR → Use Case Traceability
 
-| CFR    | CLFR                      | Use Case                     |
+| **CFR**    | **CLFR**                      | **Use Case**                     |
 | :---   | :---                      | :---                         |
 | CFR-01 | CLFR-01, CLFR-02          | UC-02 Input Memory Address   |
 | CFR-02 | CLFR-03, CLFR-04          | UC-04 Translate Address      |
