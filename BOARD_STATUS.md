@@ -1,8 +1,7 @@
 # Project Kanban Board Status
-Generated automatically on Mon May 25 05:24:07 UTC 2026
+Generated automatically on Wed May 27 06:05:23 UTC 2026
 
 ## 📋 To Do
-* [ ] US-1.2 — Define Memory Address Mapping Requirements
 * [ ] US-1.3 — Define Cache Lookup and Resolution Requirements
 * [ ] US-1.4 — Define Replacement Policy & Eviction Requirements
 * [ ] US-1.5 — Define Visualization & Runtime Feedback Requirements
@@ -16,6 +15,7 @@ Generated automatically on Mon May 25 05:24:07 UTC 2026
 * [ ] US-3.4 — Apply GRASP Principles
 
 ## 🚧 In Progress
-* [ ] US 1.1: Define cache Configuration Requirements
+* [ ] US-1.2 — Define Memory Address Mapping Requirements
 
 ## ✅ Done
+* [x] US 1.1: Define cache Configuration Requirements
