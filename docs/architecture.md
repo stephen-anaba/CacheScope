@@ -218,7 +218,7 @@ As a computer architecture student, I want to input and visualize memory addre
 ## Functional Requirements (CFR)
 
 | ID     | Requirement                                                                                          |
-| :---:   | :---:                                                                                             |
+| :---   | :---                                                                                                 |
 | CFR-01 | The system shall allow users to input hexadecimal memory address                                     |
 | CFR-02 | The system shall convert hexadecimal adresses into binary representation                             |
 | CFR-03 | The system shall decompose memory addresses into tag, index, and offset components                   |
@@ -232,7 +232,7 @@ As a computer architecture student, I want to input and visualize memory addre
 ## Low-Level Functional Requirements (CLFR)
 
 | ID      | Requirement                                                                                             |
-| :---:   | :---:                                                                                                |
+| :---    | :---                                                                                                    |
 | CLFR-01 | Address input shall supprt hexadecimal notation using standard prefixes and formats                     |
 | CLFR-02 | Address input shall reject unsupported into binary representation before decomposition                  |
 | CLFR-03 | Hexdecimal addresses shall be converted into binary representation before decomposition                 |
@@ -251,45 +251,101 @@ As a computer architecture student, I want to input and visualize memory addre
 
 ## Non-Functional Requirements (CNFR)
 
-| Header 1 | Header 2 |
-|:--------:|:--------:|
-| Left     | Left     |
-| Short    | Long text item |
+| ID      | Requirement                                                                                                           |
+| :---    | :---                                                                                                                  |
+| CNFR-01 | Address decomposition calculations shall complete within 100ms under standard simulation conditions                   |
+| CNFR-02 | Address-processing logic shall remain modular and independent from visualization rendering logic                      |
+| CNFR-03 | Address visualization shall remain understandable for computer architecture students and beginner systems programmers |
+| CNFR-04 | Address-processing behavior shall remain deterministic across repeated simulations with identical inputs              |
+| CNFR-05 | Address-processing structures shall support future extnsibility without major subsystem redesign                      |
 
+## Address Processing Workflow
+1. User submits hexadecimal memory address.
+2. System validates address format.
+3. System converts hexadecimal address into binary.
+4. System determines tag/index/offset bit widths.
+5. System decomposes binary address.
+6. System updates visualization structures.
+7. System forwards processed address to cache-resolution subsystem
 
-## Configuration Parameters
+## Derived Calculations
+### Offset Bits
+$$ \text{Offset Bits} = \text{log2(Block Size)} $$
 
+### Number of Sets
+$$ \text{Sets} = \frac{\text{Cache Size}}{\text{Block Size x Associativity}} $$
 
 ## Validation Rules
-## Derived Calculation
-## Cache Lines
+
+| ID    | Rule                                                                                 |
+| :---  | :---                                                                                 |
+| VR-02 | Address input must contain only valid hexadecimal characters                         |
+| VR-02 | Address width must match configured architecture contraints                          |
+| VR-03 | Address decomposition calculations must produce non-negative tag/index/offset values |
+| VR-04 | Binary decomposition calculations must produce non-negative tag/index/offset values  |
+| VR-05 | Invalid addresses must prevent simulation execution                                  |
+
 ## Constraints
+
+| ID     | Constraint                                                                             |
+| :---   | :---                                                                                   |
+| CON-01 | Address decomposition logic must remain independent from visualization rendering logic |
+| CON-02 | Address-processing workflows must reamin compatible with future cache architectures    |
+| CON-03 | Address-processing behavior must remain deterministic                                  |
+| CON-04 | Address calculations must remain synchronized with cache configuration parameters      |
+
 ## Use Cases
-## CFR -> CLFR -> Use Case Traceability
+
+| Use Case ID | Use Case               |
+| :---        | :---                   |
+| UC-03       | Input Memory Address   |
+| UC-04       | Translate Address      |
+| UC-05       | Visualize Address Bits |
+| UC-06       | Validate Address Input |
+
+## CFR → CLFR → Use Case Traceability
+
+| CFR    | CLFR                      | Use Case                     |
+| :---   | :---                      | :---                         |
+| CFR-01 | CLFR-01, CLFR-02          | UC-02 Input Memory Address   |
+| CFR-02 | CLFR-03, CLFR-04          | UC-04 Translate Address      |
+| CFR-03 | CLFR-05, CLFR-06, CLFR-07 | UC-04 Translate Address      |
+| CFR-04 | CLFR-08, CLFR-09          | UC-05 Visualize Addres Bits  |
+| CFR-05 | CLFR-10, CFR-11           | UC-06 Validate Address Input |
+| CFR-06 | CLFR-12                   | UC-04 Translate Address      |
+| CFR-07 | CLFR-13                   | UC-04 Translate Address      |
+ CFR-08 | CLFR-14 | UC-05 Visualize Address Bits |
+
 ## Acceptance Criteria
+* Functional requirements for address processing are documented.
+* Non-functional requirements for address processing are documented.
+* Hexadecimal input requirements are defined.
+* Tag/index/offset decomposition requirements are documented.
+* Binary visualization requirements are specified.
+* Validation rules for invalid addresses are documented.
+* Derived address calculations are documented.
+* CFR → CLFR → Use Case traceability mappings are established.
+* Requirements align with future UML, SSD, GRASP, and domain-model artifacts.
+* Requirements support future extensibility for advanced memory-analysis features.
+
 ## Technical Notes
+* Align requirements with future AddressMapper subsystem design.
+* Preserve separation between simulation and visualization responsibilities.
+* Use requirement identifiers consistently across all architecture artifacts.
+* Ensure address-processing workflows remain deterministic.
+* Maintain compatibility with future cache-analytics and visualization subsystems.
+
 ## Deliverables
+* Updated architecture documentation
+* Address-processing requirement definitions
+* Address-validation documentation
+* Address decomposition calculations
+* CFR → CLFR → Use Case traceability mappings
+* Foundational inputs for future UML and GRASP artifacts
 
 ---
 
-## Low-Level Functional Requirements (CLFR)
 
-
-## Non-Functional Requirements (CNFR)
-
-
-## Configuration Parameters
-
-
-## Validation Rules
-## Derived Calculation
-## Cache Lines
-## Constraints
-## Use Cases
-## CFR -> CLFR -> Use Case Traceability
-## Acceptance Criteria
-## Technical Notes
-## Deliverables
 
 ---
 
