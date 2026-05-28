@@ -259,6 +259,14 @@ As a computer architecture student, I want to input and visualize memory addre
 | CNFR-04 | Address-processing behavior shall remain deterministic across repeated simulations with identical inputs              |
 | CNFR-05 | Address-processing structures shall support future extnsibility without major subsystem redesign                      |
 
+## Address Components
+
+| Component | Description                                                               |
+| :---      | :---                                                                      |
+| Tag       | Identifies whether a cache line corresponds to the requested memory block |
+| Index     | Identifies the target cache set                                           |
+| Offset    | Identifies the byte position within a cache block                         |
+
 ## Address Processing Workflow
 1. User submits hexadecimal memory address.
 2. System validates address format.
@@ -345,7 +353,462 @@ $$ \text{Sets} = \frac{\text{Cache Size}}{\text{Block Size x Associativity}} $$
 
 ---
 
+# US-1.3 -- Define Cache Resolution
 
+## Requirements
+
+### Overflows
+Define the functional and non-functional requirements for cache lookup, cache-hit detection, cache-miss classification, cache-state transitions, and deterministic cache-resolution behavior within CacheScope.
+
+### These requirements establish the foundation for:
+* cache-set lookup
+* cache-hit detection
+* cache-miss classification
+* cache-state updates
+* runtime simulation behavior
+* replacement-policy integration
+
+## User Story
+As a computer architecture student, I want the system to accurately determine cache hits and misses, so that I can understand how memory accesses interact with cache architectures and replacement policies.
+
+## Scope
+### This user story covers:
+* cache-set lookup requirements
+* hit/miss detection requirements
+* cache-state update requirements
+* deterministic simulation execution
+* replacement-policy integration points
+* traceability mappings
+
+### This user story does not yet cover:
+* visualization rendering
+* animation systems
+* advanced multi-level cache orchestration
+* distributed simulation execution
+
+## Functional Requirements (CFR)
+
+| ID     | Requirement                                                                                         | Priority |
+| :---   | :---                                                                                                | :---     |
+| CFR-01 | The system shall perform cache-set lookup operations using decomposed memory addresses.             | High     |
+| CFR-02 | The system shall detect cache hits during lookup operations.                                        | High     |
+| CFR-03 | The system shall detect cache misses during lookup operations.                                      | High     |
+| CFR-04 | The system shall classify cache misses by miss type.                                                | Medium   |
+| CFR-05 | The system shall update cache state following cache-resolution execution.                           | High     |
+| CFR-06 | The system shall integrate replacement-policy execution during eviction workflows.                  | High     |
+| CFR-07 | The system shall support deterministic cache-resolution behavior.                                   | Medium   |
+| CFR-08 | The system shall support extensible cache-resolution structures for future architectural expansion. | Medium   |
+
+## Low-Level Functional Requirements (CLFR)
+
+| ID      | Requirement                                                                                      | Parent CFR |
+| CLFR-01 | Cache lookup shall identify the target cache set using decomposed index bits.                    | CFR-01     |
+| CLFR-02 | Cache lookup shall search all cache lines within the target set.                                 | CFR-01     |
+| CLFR-03 | Cache-hit detection shall compare requested tags against stored cache-line tags.                 | CFR-02     |
+| CLFR-04 | Cache-hit execution shall update replacement metadata when required.                             | CFR-02     |
+| CLFR-05 | Cache-miss detection shall occur when no valid matching tag exists.                              | CFR-03     |
+| CLFR-06 | Cache misses shall support compulsory miss classification.                                       | CFR-04     |
+| CLFR-07 | Cache misses shall support conflict miss classification.                                         | CFR-04     |
+| CLFR-08 | Cache misses shall support capacity miss classification.                                         | CFR-04     |
+| CLFR-09 | Cache-state updates shall support cache-line insertion after misses.                             | CFR-05     |
+| CLFR-10 | Cache-state updates shall support valid-bit updates.                                             | CFR-05     |
+| CLFR-11 | Replacement policies shall determine eviction targets during full-set insertion workflows.       | CFR-06     |
+| CLFR-12 | Cache-resolution execution shall remain deterministic for repeated identical simulations.        | CFR-07     | 
+| CLFR-13 | Cache-resolution structures shall support future extensibility for advanced cache architectures. | CFR-08     |
+
+## Non-Functional Requirements (CNFR)
+
+| ID      | Requirement                                                                                                                 |
+| :---    | :---                                                                                                                        |
+| CNFR-01 | Cache-resolution execution shall complete within 100ms under standard simulation conditions.                                |
+| CNFR-02 | Cache-resolution logic shall remain modular and independent from visualization rendering logic.                             |
+| CNFR-03 | Cache-resolution behavior shall remain deterministic across repeated simulations with identical inputs.                     |
+| CNFR-04 | Cache-resolution workflows shall remain understandable for computer architecture students and beginner systems programmers. |
+| CNFR-05 | Cache-resolution structures shall support future extensibility without major subsystem redesign.                            |
+
+## Cache Resolution Workflow
+1. Address decomposition subsystem forwards processed address.
+2. System identifies target cache set.
+3. System searches cache lines within target set.
+4. System compares tags.
+5. System determines hit or miss result.
+6. System updates replacement metadata.
+7. System updates cache state.
+8. System forwards execution results to visualization and analytics subsystems.
+
+## Validation Rules
+
+| ID    | Rule                                                                              |
+| :---  | :---                                                                              |
+| VR-01 | Cache lookup operations must use decomposed index values.                         |
+| VR-02 | Cache-hit detection must compare valid cache-line tags only.                      |
+| VR-03 | Cache-state updates must preserve deterministic execution order.                  |
+| VR-04 | Replacement-policy execution must occur only during full-set insertion workflows. |
+| VR-05 | Cache misses must trigger cache-state update workflows.                           |
+
+## Constraints
+
+| ID     | Constraint                                                                                       |
+| :---   | :---                                                                                             |
+| CON-01 | Cache-resolution logic must remain independent from visualization rendering logic.               |
+| CON-02 | Cache-resolution workflows must remain compatible with future replacement policies.              |
+| CON-03 | Cache-resolution execution must remain deterministic.                                            |
+| CON-04 | Cache-resolution workflows must remain synchronized with analytics and visualization subsystems. |
+
+## Use Cases
+
+| Use Case ID                        | Use Case           |
+| :---                               | :---               |
+| UC-07                              | Search Cache Set   |
+| UC-08                              | Detect Cache Hit   |
+| UC-09                              | Detect Cache Miss  |
+| UC-10                              | Update Cache State |
+
+## CFR → CLFR → Use Case Traceability
+
+| CFR    | CLFR                      | Use Case                 |
+| :---   | :---                      | :---                     |
+| CFR-01 | CLFR-01, CLFR-02          | UC-07 Search Cache Set   |
+| CFR-02 | CLFR-03, CLFR-04          | UC-08 Detect Cache Hit   |
+| CFR-03 | CLFR-05                   | UC-09 Detect Cache Miss  |
+| CFR-04 | CLFR-06, CLFR-07, CLFR-08 | UC-09 Detect Cache Miss  |
+| CFR-05 | CLFR-09, CLFR-10          | UC-10 Update Cache State |
+| CFR-06 | CLFR-11                   | UC-10 Update Cache State |
+| CFR-07 | CLFR-12                   | UC-07 Search Cache Set   |
+| CFR-08 | CLFR-13                   | UC-10 Update Cache State |
+
+## Acceptance Criteria
+* Functional requirements for cache resolution are documented.
+* Non-functional requirements for cache resolution are documented.
+* Cache-hit and cache-miss detection requirements are defined.
+* Cache-state update requirements are documented.
+* Miss-classification requirements are specified.
+* Validation rules for cache-resolution workflows are documented.
+* CFR → CLFR → Use Case traceability mappings are established.
+* Requirements align with future UML, SSD, GRASP, and domain-model artifacts.
+* Requirements support future extensibility for advanced cache architectures.
+
+## Technical Notes
+* Align requirements with future Cache and CacheSet subsystem design.
+* Preserve separation between simulation and visualization responsibilities.
+* Use requirement identifiers consistently across all architecture artifacts.
+* Ensure cache-resolution workflows remain deterministic.
+* Maintain compatibility with future analytics and visualization subsystems.
+
+## Deliverables
+* Updated architecture documentation
+* Cache-resolution requirement definitions
+* Cache-state transition documentation
+* Miss-classification documentation
+* CFR → CLFR → Use Case traceability mappings
+* Foundational inputs for future UML and GRASP artifacts
+
+---
+
+# US-1.4 — Define Replacement Policy Requirements
+### Overview
+Define the functional and non-functional requirements for cache replacement policies, eviction workflows, replacement metadata management, and extensible replacement-policy execution within CacheScope.
+
+### These requirements establish the foundation for:
+* LRU policy execution
+* FIFO policy execution
+* eviction management
+* replacement metadata tracking
+* replacement-policy abstraction
+* future policy extensibility
+
+## User Story
+As a computer architecture student, I want the simulator to model realistic replacement policies, so that I can analyze how eviction strategies influence cache behavior and performance.
+
+## Scope
+### This user story covers:
+* replacement-policy requirements
+* eviction workflows
+* replacement metadata requirements
+* policy abstraction requirements
+* deterministic replacement execution
+* traceability mappings
+
+### This user story does not yet cover:
+* visualization animation systems
+* predictive replacement algorithms
+* hardware-level optimization modeling
+* distributed cache architectures
+
+## Functional Requirements (CFR)
+
+| ID                                       | Requirement                                                                 | Priority |
+| :---                                     | :---                                                                        | :---     |
+| CFR-01                                   | The system shall support LRU replacement-policy execution.                  | High     |
+| CFR-02                                   | The system shall support FIFO replacement-policy execution.                 | High     |
+| CFR-03                                   | The system shall support cache-line eviction workflows.                     | High     |
+| CFR-04                                   | The system shall maintain replacement metadata during simulation execution. | High     |
+| CFR-05                                   | The system shall support replacement-policy abstraction and extensibility.  | Medium   |
+| CFR-06                                   | The system shall support deterministic replacement-policy execution.        | Medium   |
+| CFR-07                                   | The system shall support future replacement-policy expansion.               | Medium   |
+
+##  Low-Level Functional Requirements (CLFR)
+
+| ID      | Requirement                                                                                     | Parent CFR |
+| :---    | :---                                                                                            | :---       |
+| CLFR-01 | LRU execution shall evict the least recently used cache line within a set.                      | CFR-01     |
+| CLFR-02 | LRU execution shall update usage metadata after cache hits and insertions.                      | CFR-01     |
+| CLFR-03 | FIFO execution shall evict the oldest inserted cache line within a set.                         | CFR-02     |
+| CLFR-04 | FIFO execution shall preserve insertion-order metadata.                                         | CFR-02     |
+| CLFR-05 | Eviction workflows shall execute when inserting into fully occupied cache sets.                 | CFR-03     |
+| CLFR-06 | Eviction workflows shall identify and remove target cache lines before insertion.               | CFR-03     |
+| CLFR-07 | Replacement metadata shall remain synchronized with cache-state transitions.                    | CFR-04     |
+| CLFR-08 | Replacement-policy execution shall remain implementation-independent at the requirements stage. | CFR-05     |
+| CLFR-09 | Replacement-policy structures shall support Strategy Pattern integration.                       | CFR-05     |
+| CLFR-10 | Replacement-policy execution shall remain deterministic across repeated simulations.            | CFR-06     |
+| CLFR-11 | Replacement-policy structures shall support future extensibility for additional policies.       | CFR-07     |
+
+## Non-Functional Requirements (CNFR)
+
+| ID      | Requirement                                                                                                                   |
+| :---    | :---                                                                                                                          |
+| CNFR-01 | Replacement-policy execution shall complete within 100ms under standard simulation conditions.                                |
+| CNFR-02 | Replacement-policy logic shall remain modular and independent from visualization rendering logic.                             |
+| CNFR-03 | Replacement-policy execution shall remain deterministic across repeated simulations with identical inputs.                    |
+| CNFR-04 | Replacement-policy workflows shall remain understandable for computer architecture students and beginner systems programmers. |
+| CNFR-05 | Replacement-policy structures shall support future extensibility without major subsystem redesign.                            |
+
+## Replacement Workflow
+1. Cache-resolution subsystem detects cache miss.
+2. System identifies target cache set.
+3. System determines whether free cache lines exist.
+4. System invokes replacement-policy execution if set is full.
+5. System selects eviction target.
+6. System removes target cache line.
+7. System inserts new cache line.
+8. System updates replacement metadata.
+
+## Validation Rules
+
+| ID    | Rule                                                                        |
+| :---  | :---                                                                        |
+| VR-01 | Replacement policies must execute only during full-set insertion workflows. |
+| VR-02 | Replacement metadata must remain synchronized with cache-state transitions. |
+| VR-03 | Eviction workflows must preserve deterministic execution order.             |
+| VR-04 | Replacement-policy execution must identify exactly one eviction target.     |
+| VR-05 | Newly inserted cache lines must update replacement metadata.                |
+
+## Constraints
+
+| ID     | Constraint                                                                                       |
+| :---   | :---                                                                                             |
+| CON-01 | Replacement-policy logic must remain independent from visualization rendering logic.             |
+| CON-02 | Replacement-policy execution must remain deterministic.                                          |
+| CON-03 | Replacement-policy structures must remain compatible with future cache architectures.            |
+| CON-04 | Replacement-policy workflows must remain compatible with analytics and visualization subsystems. |
+
+## Use Cases
+
+| Use Case ID                        | Use Case                    |
+| :---                               | :---                        |
+| UC-11                              | Execute LRU Policy          |
+| UC-12                              | Execute FIFO Policy         |
+| UC-13                              | Evict Cache Line            |
+| UC-14                              | Update Replacement Metadata |
+
+## CFR → CLFR → Use Case Traceability
+
+| CFR    | CLFR             | Use Case                          |
+| :---   | :---             | :---                              |
+| CFR-01 | CLFR-01, CLFR-02 | UC-11 Execute LRU Policy          |
+| CFR-02 | CLFR-03, CLFR-04 | UC-12 Execute FIFO Policy         |
+| CFR-03 | CLFR-05, CLFR-06 | UC-13 Evict Cache Line            |
+| CFR-04 | CLFR-07          | UC-14 Update Replacement Metadata |
+| CFR-05 | CLFR-08, CLFR-09 | UC-11 Execute LRU Policy          |
+| CFR-06 | CLFR-10          | UC-13 Evict Cache Line            |
+| CFR-07 | CLFR-11          | UC-14 Update Replacement Metadata |
+
+## Acceptance Criteria
+* Functional requirements for replacement policies are documented.
+* Non-functional requirements for replacement policies are documented.
+* LRU and FIFO policy requirements are defined.
+* Eviction workflow requirements are documented.
+* Replacement metadata requirements are specified.
+* Validation rules for replacement-policy execution are documented.
+* CFR → CLFR → Use Case traceability mappings are established.
+* Requirements align with future UML, SSD, GRASP, and domain-model artifacts.
+* Requirements support future extensibility for advanced replacement policies.
+
+## Technical Notes
+* Align requirements with future replacement-policy subsystem design.
+* Preserve separation between simulation and visualization responsibilities.
+* Use requirement identifiers consistently across all architecture artifacts.
+* Ensure replacement-policy workflows remain deterministic.
+* Integrate future policies using Strategy Pattern abstractions.
+
+## Deliverables
+* Updated architecture documentation
+* Replacement-policy requirement definitions
+* Eviction workflow documentation
+* Replacement metadata documentation
+* CFR → CLFR → Use Case traceability mappings
+* Foundational inputs for future UML and GRASP artifacts
+
+
+# US-1.5 — Define Visualization Requirements
+### Overview
+Define the functional and non-functional requirements for cache visualization, runtime simulation feedback, cache-state rendering, and educational visualization workflows within CacheScope.
+
+### These requirements establish the foundation for:
+* cache-grid visualization
+* hit/miss highlighting
+* eviction visualization
+* runtime simulation feedback
+* simulation logging
+* educational interaction workflows
+
+## User Story
+As a computer architecture student, I want to visually observe cache behavior during simulation execution, so that I can better understand memory mapping, cache hits/misses, and replacement-policy behavior.
+
+## Scope
+### This user story covers:
+* cache-grid visualization requirements
+* hit/miss highlighting requirements
+* eviction visualization requirements
+* simulation-log requirements
+* visualization synchronization requirements
+* educational feedback workflows
+* traceability mappings
+
+### This user story does not yet cover:
+* advanced animation engines
+* 3D visualization systems
+* collaborative visualization tooling
+* distributed rendering systems
+
+## Functional Requirements (CFR)
+
+| ID                                       | Requirement                                                                                  | Priority |
+| :---                                     | :---                                                                                         | :---     |
+| CFR-01                                   | The system shall visually represent cache structures during simulation execution.            | High     |
+| CFR-02                                   | The system shall visually distinguish cache hits and cache misses.                           | High     |
+| CFR-03                                   | The system shall visually represent cache-line eviction workflows.                           | Medium   |
+| CFR-04                                   | The system shall provide runtime simulation logs and execution feedback.                     | Medium   |
+| CFR-05                                   | The system shall synchronize visualization updates with simulation execution.                | High     |
+| CFR-06                                   | The system shall support educational visualization workflows for beginner systems learners.  | Medium   |
+| CFR-07                                   | The system shall support extensible visualization structures for future simulation features. | Medium   |
+
+## Low-Level Functional Requirements (CLFR)
+
+| ID                                 | Requirement                                                                                   | Parent CFR |
+| :---                               | :---                                                                                          | :---       |
+| CLFR-01                            | Cache visualization shall display cache sets and cache lines.                                 | CFR-01     |
+| CLFR-02                            | Cache visualization shall display valid cache-line metadata.                                  | CFR-01     |
+| CLFR-03                            | Cache-hit execution shall visually highlight successful lookups.                              | CFR-02     |
+| CLFR-04                            | Cache-miss execution shall visually highlight failed lookups.                                 | CFR-02     |
+| CLFR-05                            | Eviction workflows shall visually identify removed cache lines.                               | CFR-03     |
+| CLFR-06                            | Eviction workflows shall visually identify inserted cache lines.                              | CFR-03     |
+| CLFR-07                            | Runtime logs shall record simulation events and execution results.                            | CFR-04     |
+| CLFR-08                            | Visualization updates shall remain synchronized with simulation-state transitions.            | CFR-05     |
+| CLFR-09                            | Visualization workflows shall support step-by-step simulation analysis.                       | CFR-06     |
+| CLFR-10                            | Visualization structures shall support future extensibility for advanced educational tooling. | CFR-07     |
+
+## Non-Functional Requirements (CNFR)
+
+| ID      | Requirement                                                                                                              |
+| :---    | :---                                                                                                                     |
+| CNFR-01 | Visualization updates shall complete within 100ms under standard simulation conditions.                                  |
+| CNFR-02 | Visualization logic shall remain modular and independent from backend simulation logic.                                  |
+| CNFR-03 | Visualization workflows shall remain understandable for computer architecture students and beginner systems programmers. |
+| CNFR-04 | Visualization updates shall remain synchronized with deterministic simulation execution.                                 |
+| CNFR-05 | Visualization structures shall support future extensibility without major subsystem redesign.                            |
+
+### Visualization Workflow
+1. Simulation subsystem executes cache operation.
+2. Cache-resolution subsystem generates execution results.
+3. Visualization subsystem receives simulation-state updates.
+4. Visualization subsystem updates cache-grid representation.
+5. Visualization subsystem highlights hit/miss outcomes.
+6. Visualization subsystem updates runtime logs.
+7. Visualization subsystem synchronizes execution feedback.
+
+## Validation Rules
+
+| ID    | Rule                                                                              |
+| :---  | :---                                                                              |
+| VR-01 | Visualization updates must remain synchronized with simulation-state transitions. |
+| VR-02 | Cache-hit and cache-miss states must remain visually distinguishable.             |
+| VR-03 | Runtime logs must preserve deterministic event order.                             |
+| VR-04 | Visualization updates must reflect current cache state accurately.                |
+| VR-05 | Visualization rendering failures must not interrupt simulation execution.         |
+
+## Constraints
+
+| ID     | Constraint                                                                               |
+| :---   | :---                                                                                     |
+| CON-01 | Visualization logic must remain independent from backend simulation logic.               |
+| CON-02 | Visualization workflows must remain compatible with future cache architectures.          |
+| CON-03 | Visualization updates must remain synchronized with analytics and simulation subsystems. |
+| CON-04 | Visualization workflows must prioritize educational clarity over rendering complexity.   |
+
+## Use Cases
+
+| Use Case ID | Use Case               |
+| :---        | :---                   |
+| UC-15       | Visualize Cache State  |
+| UC-16       | Highlight Cache Hit    |
+| UC-17       | Highlight Cache Miss   |
+| UC-18       | Display Simulation Log |
+
+## CFR → CLFR → Use Case Traceability
+
+| CFR    | CLFR             | Use Case                     |
+| CFR-01 | CLFR-01, CLFR-02 | UC-15 Visualize Cache State  |
+| CFR-02 | CLFR-03, CLFR-04 | UC-16 Highlight Cache Hit    |
+| CFR-03 | CLFR-05, CLFR-06 | UC-17 Highlight Cache Miss   |
+| CFR-04 | CLFR-07          | UC-18 Display Simulation Log |
+| CFR-05 | CLFR-08          | UC-15 Visualize Cache State  |
+| CFR-06 | CLFR-09          | UC-18 Display Simulation Log |
+| CFR-07 | CLFR-10          | UC-15 Visualize Cache State  |
+
+## Acceptance Criteria
+* Functional requirements for visualization workflows are documented.
+* Non-functional requirements for visualization workflows are documented.
+* Cache-grid visualization requirements are defined.
+* Hit/miss highlighting requirements are documented.
+* Eviction visualization requirements are specified.
+* Runtime simulation-log requirements are documented.
+* Validation rules for visualization synchronization are defined.
+* CFR → CLFR → Use Case traceability mappings are established.
+* Requirements align with future UML, SSD, GRASP, and domain-model artifacts.
+* Requirements support future extensibility for advanced educational tooling.
+
+## Technical Notes
+* Align requirements with future visualization subsystem design.
+* Preserve separation between visualization and backend simulation responsibilities.
+* Use requirement identifiers consistently across all architecture artifacts.
+* Ensure visualization workflows remain synchronized with deterministic simulation execution.
+* Maintain compatibility with analytics and metrics subsystems.
+
+## Deliverables
+* Updated architecture documentation
+* Visualization requirement definitions
+* Runtime feedback workflow documentation
+* Visualization synchronization documentation
+* CFR → CLFR → Use Case traceability mappings
+* Foundational inputs for future UML and GRASP artifacts
+
+
+--------------------------------------------------
+
+## Configuration Parameters
+
+
+
+## Validation Rules
+## Derived Calculation
+## Cache Lines
+## Constraints
+## Use Cases
+## CFR -> CLFR -> Use Case Traceability
+## Acceptance Criteria
+## Technical Notes
+## Deliverables
 
 ---
 
