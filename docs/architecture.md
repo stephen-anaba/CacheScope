@@ -406,20 +406,21 @@ As a computer architecture student, I want the system to accurately determine 
 
 ## Low-Level Functional Requirements (CLFR)
 
-| ID      | Requirement                                                                                      | Parent CFR |
-| CLFR-01 | Cache lookup shall identify the target cache set using decomposed index bits.                    | CFR-01     |
-| CLFR-02 | Cache lookup shall search all cache lines within the target set.                                 | CFR-01     |
-| CLFR-03 | Cache-hit detection shall compare requested tags against stored cache-line tags.                 | CFR-02     |
-| CLFR-04 | Cache-hit execution shall update replacement metadata when required.                             | CFR-02     |
-| CLFR-05 | Cache-miss detection shall occur when no valid matching tag exists.                              | CFR-03     |
-| CLFR-06 | Cache misses shall support compulsory miss classification.                                       | CFR-04     |
-| CLFR-07 | Cache misses shall support conflict miss classification.                                         | CFR-04     |
-| CLFR-08 | Cache misses shall support capacity miss classification.                                         | CFR-04     |
-| CLFR-09 | Cache-state updates shall support cache-line insertion after misses.                             | CFR-05     |
-| CLFR-10 | Cache-state updates shall support valid-bit updates.                                             | CFR-05     |
-| CLFR-11 | Replacement policies shall determine eviction targets during full-set insertion workflows.       | CFR-06     |
-| CLFR-12 | Cache-resolution execution shall remain deterministic for repeated identical simulations.        | CFR-07     | 
-| CLFR-13 | Cache-resolution structures shall support future extensibility for advanced cache architectures. | CFR-08     |
+| ID      | Requirement                                                                                     | Parent CFR |
+| :---    | :---                                                                                            | :---       |
+| CLFR-01 | Cache lookup shall identify the target cache set using decomposed index bits                    | CFR-01     |
+| CLFR-02 | Cache lookup shall search all cache lines within the target set                                 | CFR-01     |
+| CLFR-03 | Cache-hit detection shall compare requested tags against stored cache-line tags                 | CFR-02     |
+| CLFR-04 | Cache-hit execution shall update replacement metadata when required                             | CFR-02     |
+| CLFR-05 | Cache-miss detection shall occur when no valid matching tag exists                              | CFR-03     |
+| CLFR-06 | Cache misses shall support compulsory miss classification                                       |
+| CLFR-07 | Cache misses shall support conflict miss classification                                         | CFR-04     |
+| CLFR-08 | Cache misses shall support capacity miss classification                                         | CFR-04     |
+| CLFR-09 | Cache-state updates shall support cache-line insertion after misses                             | CFR-05     |
+| CLFR-10 | Cahe-state updates shall support valid-bit updates                                              | CFR-05     |
+| CLFR-11 | Replacement policies shall determine eviction targets during full-set insertion workflows       |
+| CLFR-12 | Cache-resolution execution shall remain deterministic for repeated identical simulations        | CFR-07     |
+| CLFR-13 | Cache-resolution structures shall support future extensibility for advanced cache architectures |
 
 ## Non-Functional Requirements (CNFR)
 
