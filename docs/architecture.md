@@ -388,7 +388,7 @@ As a computer architecture student, I want the system to accurately determine 
 
 ## Functional Requirements (CFR)
 
-| ID      | Requirement                                                                                      | Parent CFR |
+| **ID**      | **Requirement**                                                                                      | **Parent CFR** |
 | :---    | :---                                                                                             | :---       |
 | CLFR-01 | Cache lookup shall identify the target cache set using decomposed index bits.                    | CFR-01     |
 | CLFR-02 | Cache lookup shall search all cache lines within the target set.                                 | CFR-01     |
@@ -406,7 +406,7 @@ As a computer architecture student, I want the system to accurately determine 
 
 ## Low-Level Functional Requirements (CLFR)
 
-| ID      | Requirement                                                                                     | Parent CFR |
+| **ID**      | **Requirement**                                                                                     | **Parent CFR** |
 | :---    | :---                                                                                            | :---       |
 | CLFR-01 | Cache lookup shall identify the target cache set using decomposed index bits                    | CFR-01     |
 | CLFR-02 | Cache lookup shall search all cache lines within the target set                                 | CFR-01     |
@@ -424,7 +424,7 @@ As a computer architecture student, I want the system to accurately determine 
 
 ## Non-Functional Requirements (CNFR)
 
-| ID      | Requirement                                                                                                                 |
+| **ID**      | **Requirement**                                                                                                                 |
 | :---    | :---                                                                                                                        |
 | CNFR-01 | Cache-resolution execution shall complete within 100ms under standard simulation conditions.                                |
 | CNFR-02 | Cache-resolution logic shall remain modular and independent from visualization rendering logic.                             |
@@ -444,7 +444,7 @@ As a computer architecture student, I want the system to accurately determine 
 
 ## Validation Rules
 
-| ID    | Rule                                                                              |
+| **ID**    | **Rule**                                                                              |
 | :---  | :---                                                                              |
 | VR-01 | Cache lookup operations must use decomposed index values.                         |
 | VR-02 | Cache-hit detection must compare valid cache-line tags only.                      |
@@ -800,22 +800,534 @@ As a computer architecture student, I want to visually observe cache behavior 
 * CFR → CLFR → Use Case traceability mappings
 * Foundational inputs for future UML and GRASP artifacts
 
+# US 1.6: Metrics & Analytics Requirements
+## Overview
+Define the functional and non-functional requirements for runtime metrics collection, cache-efficiency analytics, live performance monitoring, and simulation-analysis workflows within CacheScope.
+
+### These requirements establish the foundation for:
+* hit-rate analytics
+* miss-rate analytics
+* live runtime metrics
+* simulation performance monitoring
+* educational analytics visualization
+* future performance-analysis tooling
+
+## User Story
+As a computer architecture student, I want to monitor runtime cache metrics during simulation execution, so that I can analyze cache efficiency and understand the performance impact of cache configurations and replacement policies
+
+## Scope
+This user story covers:
+* hit-rate calculation requirements
+* miss-rate calculation requirements
+* live-metrics display requirements
+* metrics-update synchronization
+* runtime analytics requirements
+* traceability mappings
+
+### This story doesnot yet cover;
+* distributed telemetry systems
+* persistent analystics storage
+* clooud-based monitoring infrastructure
+* predicitive analytics engines
+
+## Functional Requirements (CFR)
+
+| ID     | Requirement                                                                             |
+| :---   | :---                                                                                    |
+| CFR-01 | the system shall calculate cache hit rates during simulation execution                  |
+| CFR-02 | The system shall calculate cache miss rates during simulation execution                 |
+| CFR-03 | The system shall provide live runtime metrics during simulation execustion              |
+| CFR-04 | The system shall synchronize analytics updates with simulation execution                |
+| CFR-05 | The system shall support educational performance-analysis workflows                     |
+| CFR-06 | The systemshall suppport extensible analytics structures for future simulation features |
+
+## Low-Level Functional Requirements (CLFR)
+
+| ID      | Requirement                                                                                | Parent CFR |
+| :---    | :---                                                                                       | :---       |
+| CLFR-01 | Hit-rate calculations shall track total cache hits and total memory accesses.              | CFR-01     |
+| CLFR-02 | Hit-rate calculations shall update after each simulation operation.                        | CFR-01     |
+| CLFR-03 | Miss-rate calculations shall track total cache misses and total memory accesses.           | CFR-02     |
+| CLFR-04 | Miss-rate calculations shall update after each simulation operation.                       | CFR-02     |
+| CLFR-05 | Live metrics shall display current hit rates during simulation execution.                  | CFR-03     |
+| CLFR-06 | Live metrics shall display current miss rates during simulation execution.                 | CFR-03     |
+| CLFR-07 | Metrics updates shall remain synchronized with deterministic simulation-state transitions. | CFR-04     |
+| CLFR-08 | Analytics workflows shall support step-by-step performance analysis.                       | CFR-05     |
+| CLFR-09 | Analytics structures shall support future extensibility for advanced metrics tooling.      |
+
+## Non-Functional Requirements (CNFR)
+
+| ID      | Requirement                                                                                                        |
+| :---    | :---                                                                                                               |
+| CNFR-01 | Metrics updates shall complete within 100ms under standard simulation conditions.                                  |
+| CNFR-02 | Analytics logic shall remain modular and independent from visualization rendering logic.                           |
+| CNFR-03 | Metrics calculations shall remain deterministic across repeated simulations with identical inputs.                 |
+| CNFR-04 | Runtime analytics shall remain understandable for computer architecture students and beginner systems programmers. |
+| CNFR-05 | Analytics structures shall support future extensibility without major subsystem redesign.                          |
+
+## Metrics Workflow
+1. Simulation subsystem executes cache operation.
+2. Cache-resolution subsystem generates hit/miss result.
+3. Analytics subsystem updates runtime counters.
+4. System recalculates hit and miss rates.
+5. Visualization subsystem receives updated metrics.
+6. Metrics display synchronizes runtime analytics feedback.
+
+## Derived Calculations
+### Hit Rate
+$$ \text{Hit Rate} = \frac{\text{Total Cache Hits}}{\text{Total memory Access}} $$
+
+### Cache Lines
+$$ \text{Miss Rate} = \frac{\text{Total Cache Misses}}{\text{Total Memory Access}} $$
+
+## Validation Rules
+
+| ID    | Rule                                                                        |
+| :---  | :---                                                                        |
+| VR-01 | Hit-rate calculations must use total cache hits and total accesses.         |
+| VR-02 | Miss-rate calculations must use total cache misses and total accesses.      |
+| VR-03 | Metrics updates must remain synchronized with simulation-state transitions. |
+| VR-04 | Metrics calculations must preserve deterministic execution order.           |
+| VR-05 | Analytics update failures must not interrupt simulation execution           |
+
+## Constraints
+
+| ID     | Constraint                                                                                 |
+| :---   | :---                                                                                       |
+| CON-01 | Analytics logic must remain independent from visualization rendering logic.                |
+| CON-02 | Analytics workflows must remain compatible with future cache architectures.                |
+| CON-03 | Metrics calculations must remain deterministic.                                            |
+| CON-04 | Analytics workflows must remain synchronized with visualization and simulation subsystems. |
+
+## Use Cases
+
+| Use Case ID | Use Case                  |
+| :---        | :---                      |
+| UC-19       | Calculate Hit Rate        |
+| UC-20       | Calculate Miss Rate       |
+| UC-21       | Display Runtime Metrics   |
+| UC-22       | Analyze Cache Performance |
+
+## CFR → CLFR → Use Case Traceability
+
+| CFR    | CLFR             | Use Case                        |
+| :---   | :---             | :---                            |
+| CFR-01 | CLFR-01, CLFR-02 | UC-19 Calculate Hit Rate        |
+| CFR-02 | CLFR-03, CLFR-04 | UC-20 Calculate Miss Rate       |
+| CFR-03 | CLFR-05, CLFR-06 | UC-21 Display Runtime Metrics   |
+| CFR-04 | CLFR-07          | UC-21 Display Runtime Metrics   |
+| CFR-05 | CLFR-08          | UC-22 Analyze Cache Performance |
+| CFR-06 | CLFR-09          | UC-22 Analyze Cache Performance |
+
+## Technical Notes
+* Align requirements with future Metrics subsystem design.
+* Preserve separation between analytics and visualization responsibilities.
+* Use requirement identifiers consistently across all architecture artifacts.
+* Ensure analytics workflows remain synchronized with deterministic simulation execution.
+* Maintain compatibility with visualization and simulation subsystems.
+
+## Technical Notes
+* Align requirements with future Metrics subsystem design.
+* Preserve separation between analytics and visualization responsibilities.
+* Use requirement identifiers consistently across all architecture artifacts.
+* Ensure analytics workflows remain synchronized with deterministic simulation execution.
+* Maintain compatibility with visualization and simulation subsystems.
+---
+
+US-2.1 — Create Cache Configuration Use Cases
+Overview
+Model cache-configuration behavior through formal use cases to support architecture-first system development, deterministic simulation setup workflows, and scalable cache-system orchestration within CacheScope.
+
+These use cases establish the behavioral foundation for:
+* cache-configuration workflows
+* configuration validation
+* simulation initialization
+* subsystem synchronization
+* future SSD development
+* sequence-diagram modeling
+* controller responsibility assignment
+* GRASP analysis
+
+User Story
+As a computer architecture student, I want to configure cache simulation parameters before execution, so that I can experiment with different cache architectures and analyze their runtime behavior.
+
+Scope
+This user story covers:
+* cache-configuration workflows
+* configuration validation behavior
+* actor/system interaction modeling
+* configuration synchronization
+* alternate execution flows
+* failure scenarios
+* preconditions and postconditions
+* subsystem coordination
+
+This user story does not yet cover:
+* cache visualization rendering
+* runtime metrics analytics
+* distributed simulation systems
+* advanced multi-level cache orchestration
+* predictive configuration optimization
+
+Actors
+Actor	Description
+User	Configures simulation parameters before runtime execution.
+Configuration Controller	Coordinates cache-configuration workflows.
+Cache Subsystem	Stores and applies validated cache parameters.
+AddressMapper Subsystem	Recalculates address decomposition values after configuration changes.
+Visualization Subsystem	Synchronizes configuration-dependent visualization updates.
+
+Business Rules
+ID	Rule
+BR-01	Cache size must remain compatible with associativity and block size.
+BR-02	Block size must be a power of two.
+BR-03	Associativity must remain greater than zero.
+BR-04	Replacement-policy selection must map to a supported strategy implementation.
+BR-05	Configuration changes must synchronize dependent subsystems before simulation execution.
+
+Use Cases
+Use Case ID	Use Case
+UC-2.1	Configure Cache
+UC-2.2	Validate Cache Configuration
+UC-2.3	Apply Cache Configuration
+
+———
+
+# UC-2.1 — Configure Cache
+### Goal
+Allow users to define simulation cache parameters before runtime execution.
+
+### Primary Actor
+User
+
+### Supporting Actors
+* Configuration Controller
+* Cache Subsystem
+
+### Trigger
+User selects the cache-configuration interface.
+
+### Preconditions
+* CacheScope application is initialized.
+* Simulation execution has not started.
+* Configuration subsystem is available.
+
+### Postconditions
+#### Success:
+* Valid configuration values are stored.
+* Dependent subsystems synchronize configuration changes.
+
+#### Failure
+* Invalid configuration values are rejected.
+* Existing valid configuration remains unchanged.
+
+### Main Success Scenario
+1. User opens cache-configuration interface.
+2. System displays configurable cache parameters.
+3. User enters cache size.
+4. User enters associativity value.
+5. User enters block size.
+6. User selects replacement policy.
+7. User submits configuration.
+8. System validates configuration values.
+9. System synchronizes dependent subsystems.
+10. System stores updated configuration.
+11. System confirms successful configuration.
+
+### Alternate Flows
+#### AF-01 — Partial Configuration Update
+1. User modifies only one parameter.
+2. System validates modified parameter.
+3. System preserves unchanged configuration values.
+4. System synchronizes affected subsystems only.
+
+### Failure Flows
+#### FF-01 — Invalid Cache Size
+1. User enters unsupported cache size.
+2. System rejects configuration.
+3. System highlights invalid field.
+4. System displays validation feedback.
+
+#### FF-02 — Invalid Associativity
+1. User enters invalid associativity value.
+2. System rejects configuration
+3. System highlights invalid field.
+4. System displays validation feedback.
+ 
+#### FF-03 — Invalid Block Size
+1. User enters unsupported block size.
+2. System rejects configuration.
+3. System highlights invalid field.
+5. System displays validation feedback.
+ 
+####  FF-04 — Conflicting Parameters
+1. User enters parameters where block size exceeds cache size.
+2. System rejects configuration.
+3. System displays error message explaining conflict.
+4. System blocks simulation execution.
+ 
+#### FF-05 — Empty Parameter Fields
+1. User attempts simulation execution with blank configuration fields.
+2. System prevents simulation start.
+3. System highlights missing inputs.
+4. System prompts user to complete setup.
+
+---
+
+# UC-2.2 — Validate Cache Configuration
+## Overview
+Validate cache configuration parameters before simulation execution to ensure configuration consistency, deterministic behavior, subsystem compatibility, and accurate cache modeling within CacheScope.
+
+### This use case establishes the validation workflow for:
+- cache size
+- associativity
+- block size
+- replacement policies
+- parameter compatibility
+- subsystem synchronization readiness
+
+### Goal
+Ensure all cache configuration parameters are valid, compatible, and safe for simulation execution before the configuration is applied to the system.
+
+### Primary Actor
+Configuration Controller
+
+### Supporting Actors
+#### Actor	
+Responsibility
+#### User	
+Provides cache configuration values.
+#### Cache Subsystem	
+Receives validated cache parameters.
+#### AddressMapper Subsystem	
+Uses configuration values for address decomposition calculations.
+#### Visualization Subsystem	
+Synchronizes configuration-dependent rendering behavior.
+
+### Trigger
+User submits cache configuration values through the configuration interface.
+
+### Preconditions
+1. CacheScope application is initialized.
+2.  Configuration workflow is active.
+3.  User has entered configuration values.
+4.  Simulation execution has not started.
+
+### Postconditions
+#### Success
+1. Configuration validity status is generated.
+2. Valid configuration parameters are forwarded for application.
+3. Dependent subsystems are cleared for synchronization.
+
+### Failure
+1. Invalid configuration is rejected.
+2. Existing stable configuration remains unchanged.
+3. Validation feedback is generated.
+
+### Main Success Scenario
+1. User submits cache configuration parameters.
+2. System receives configuration request.
+3. System validates cache size.
+4. System validates associativity value.
+5. System validates block size.
+6. System validates replacement-policy selection.
+7. System validates parameter compatibility.
+8. System validates cache architecture constraints.
+9. System confirms configuration validity.
+10. System forwards validated configuration for application.
+11. System generates successful validation feedback.
+
+### Alternate Flows
+#### AF-01 — Revalidation After Partial Update
+1. User modifies only one configuration parameter.
+2. System detects partial configuration update.
+3. System validates only affected dependencies.
+4. System preserves previously validated values.
+5. System confirms successful revalidation.
+
+#### AF-02 — Cached Validation State
+1. System detects previously validated configuration.
+2. System reuses cached validation results.
+3. System skips redundant validation calculations.
+4. System forwards cached validation status.
+
+### Failure Flows
+#### FF-01 — Invalid Cache Size
+1. System detects unsupported cache size.
+2. System rejects configuration.
+3. System highlights invalid field.
+4. System displays corrective feedback.
+
+#### FF-02 — Invalid Associativity
+1. System detects invalid associativity value.
+2. System rejects configuration.
+3. System generates compatibility feedback.
+
+#### FF-03 — Invalid Block Size
+1. System detects invalid block size.
+2. System rejects configuration.
+3. System displays validation guidance.
+
+#### FF-04 — Unsupported Replacement Policy
+1. System detects unsupported replacement-policy selection.
+2. System rejects configuration.
+3. System generates policy compatibility feedback.
+
+#### FF-05 — Incompatible Configuration Combination
+1. System detects incompatible parameter combination.
+2. System terminates validation workflow.
+3. System preserves previous valid configuration.
+4. System displays dependency conflict feedback.
+
+## Business Rules
+
+| ID    | Rule                                                                          |
+| :---  | :---                                                                          |
+| BR-01 | Cache size must remain compatible with associativity and block size.          |
+| BR-02 | Block size must be a power of two.                                            |
+| BR-03 | Associativity must remain greater than zero.                                  |
+| BR-04 | Replacement-policy selection must map to a supported strategy implementation. |
+| BR-05 | Configuration values must remain deterministic across repeated simulations.   |
+| BR-06 | Invalid configurations must not propagate into runtime simulation workflows.  |
+
+## Validation Rules
+
+| ID    | Rule                                                                     |
+| :---  | :---                                                                     |
+| VR-01 | Cache size must remain within supported numeric limits.                  |
+| VR-02 | Associativity must not exceed cache-line constraints.                    |
+| VR-03 | Block size must support deterministic address decomposition.             |
+| VR-04 | Replacement-policy identifiers must map to implemented strategies.       |
+| VR-05 | Configuration combinations must preserve cache architecture consistency. |
+
+## Special Requirements
+1. Validation workflows must remain deterministic.
+2. Validation logic must remain independent from visualization rendering.
+3. Validation feedback must remain understandable to beginner systems students.
+4. Validation workflows should complete within 100ms under standard execution conditions.
+5. Validation structures must support future extensibility for additional cache architectures.
+
+## Assumptions
+
+| ID   | Assumption                                                          |
+| :--- | :---                                                                |
+| A-01 | Users understand basic cache-configuration terminology.             |
+| A-02 | Supported replacement policies are predefined by the system.        |
+| A-03 | Configuration validation occurs before simulation execution begins. |
+
+## Frequency of Use
+High
+
+### This workflow executes:
+1. during initial simulation setup
+2. during configuration changes
+3. during architecture experimentation workflows
+
+## Related Use Cases
+
+| Use Case ID | Relationship                                              |
+| :---        | :---                                                      |
+| UC-2.1      | Configure Cache	Precedes validation workflow              |
+| UC-2.3      | Apply Cache Configuration	Follows successful validation |
+| UC-2.5      | Translate Address	Depends on valid cache configuration  |
+
+#### Subsystem Interactions
+Subsystem	Interaction
+
+#### Configuration Controller	
+Coordinates validation workflow execution.
+#### Cache Subsystem	
+Receives validated parameters.
+#### AddressMapper Subsystem	
+Uses validated parameters for decomposition calculations.
+#### Visualization Subsystem	
+Synchronizes visualization constraints with validated configuration.
+
+## Traceability Mapping
+### Related Requirement	Mapping
+
+| CFR-01 | Cache-size validation                |
+| :---   | :---                                 |
+| CFR-02 | Associativity validation             |
+| CFR-03 | Block-size validation                |
+| CFR-04 | Replacement-policy validation        |
+| CFR-05 | Configuration consistency validation |
+| CFR-06 | Deterministic simulation preparation |
+
+## Acceptance Criteria
+1. Cache-size validation requirements are documented.
+2. Associativity validation requirements are documented.
+3. Block-size validation requirements are documented.
+4. Replacement-policy validation requirements are documented.
+5. Alternate flows are documented.
+6. Failure flows are documented.
+7. Validation rules are documented.
+8. Business rules are documented.
+9. Traceability mappings are established.
+10. Use case supports future SSD and sequence-diagram generation.
+11. Use case supports GRASP responsibility analysis.
+
+## Technical Notes
+- Align validation workflows with future ConfigurationController subsystem design.
+- Preserve separation between validation logic and rendering logic.
+- Ensure compatibility with Strategy Pattern–based replacement-policy implementations.
+- Maintain deterministic validation behavior across repeated executions.
+
+## Deliverables
+- Cache-configuration validation specification
+- Validation rules documentation
+- Alternate and failure flow documentation
+- Business-rule documentation
+- Traceability mappings
+- Foundational inputs for SSDs
+- Foundational inputs for sequence diagrams
+- Foundational inputs for GRASP analysis
+
+---
+
+# UC-2.2 currently contains:
+* Goal
+* Primary Actor
+* Supporting Actors
+* Trigger
+* Preconditions
+* Postconditions
+* Main Success Scenario
+* Alternate Flows
+* Failure Flows
+* Special Requirements
+* Frequency of Use
+* Related Use Cases
+
+The numbering structure is now:
+
+US-2.1
+ ├── UC-2.1 Configure Cache
+ ├── UC-2.2 Validate Cache Configuration
+ └── UC-2.3 Apply Cache Configuration
+
+US-2.2
+ ├── UC-2.4 Input Memory Address
+ ├── UC-2.5 Translate Address
+ └── UC-2.6 Visualize Address Bits
+
+
+---
+
+UC-2.3 — Configure Cache
+Primary Actor
+User
+Goal
+Configure cache parameters before simulation execution.
+Preconditions
+* CacheScope application is initialized.
+* Simulation execution has not started.
+Postconditions
+* Valid cache configuration is stored.
+* Simulation subsystem receives updated configuration parameters.
 
 --------------------------------------------------
 
-## Configuration Parameters
-
-
-
-## Validation Rules
-## Derived Calculation
-## Cache Lines
-## Constraints
-## Use Cases
-## CFR -> CLFR -> Use Case Traceability
-## Acceptance Criteria
-## Technical Notes
-## Deliverables
 
 ---
 
