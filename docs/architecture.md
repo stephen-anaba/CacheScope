@@ -1285,49 +1285,240 @@ Synchronizes visualization constraints with validated configuration.
 
 ---
 
-# UC-2.2 currently contains:
-* Goal
-* Primary Actor
-* Supporting Actors
-* Trigger
-* Preconditions
-* Postconditions
-* Main Success Scenario
-* Alternate Flows
-* Failure Flows
-* Special Requirements
-* Frequency of Use
-* Related Use Cases
+# UC-2.3 — Apply Cache Configuration
+## Overview
+Apply validated cache configuration parameters to the simulation environment and synchronize all dependent subsystems to ensure deterministic cache behavior, accurate address decomposition, and consistent visualization throughout CacheScope.
 
-The numbering structure is now:
+### This use case establishes the workflow for:
+- applying validated cache parameters
+- initializing cache structures
+- synchronizing dependent subsystems
+- preparing the simulation environment
+- maintaining configuration consistency
+- ensuring deterministic execution
 
-US-2.1
- ├── UC-2.1 Configure Cache
- ├── UC-2.2 Validate Cache Configuration
- └── UC-2.3 Apply Cache Configuration
+## Goal
+Apply a validated cache configuration and propagate the configuration to all dependent subsystems before simulation execution begins.
 
-US-2.2
- ├── UC-2.4 Input Memory Address
- ├── UC-2.5 Translate Address
- └── UC-2.6 Visualize Address Bits
+## Primary Actor
+Configuration Controller
 
+## Supporting Actors
 
----
+| Actor                    | Responsibility                                                                 |
+| :---                     | :---                                                                           |
+| Cache Subsystem          | Creates and initializes cache structures using validated configuration values. |
+| AddressMapper Subsystem  | Updates address decomposition calculations based on cache parameters.          |
+| Visualization  Subsystem | Updates cache-grid and address-visualization layouts.                          |
+| Metrics Subsystem        | Resets analytics state for the new simulation session.                         |
+| User                     | Initiates configuration application workflow.                                  |
 
-UC-2.3 — Configure Cache
-Primary Actor
-User
-Goal
-Configure cache parameters before simulation execution.
-Preconditions
-* CacheScope application is initialized.
-* Simulation execution has not started.
-Postconditions
-* Valid cache configuration is stored.
-* Simulation subsystem receives updated configuration parameters.
+## Trigger
+A cache configuration has successfully passed validation (UC-2.2).
 
---------------------------------------------------
+## Preconditions
+1. UC-2.2 Validate Cache Configuration completed successfully.
+2. Configuration parameters are valid.
+3. Simulation execution has not started.
+4. Required subsystems are available.
 
+## Postconditions
+### Success
+* Cache structures are initialized.
+* Address decomposition settings are updated.
+* Visualization components are synchronized.
+* Analytics state is initialized.
+* System is ready to execute simulation requests.
+
+### Failure
+* Previous valid configuration remains active.
+* Partial updates are rolled back.
+* System remains in a consistent state.
+* Error feedback is generated.
+
+### Main Success Scenario
+1. System receives validated cache configuration.
+2. Configuration Controller initiates configuration-application workflow.
+3. Cache Subsystem initializes cache structures.
+4. Cache Subsystem allocates cache sets and cache lines.
+5. Cache Subsystem initializes replacement-policy metadata.
+6. AddressMapper Subsystem recalculates address decomposition rules.
+7. Visualization Subsystem updates cache-grid representation.
+8. Visualization Subsystem updates address-bit visualization layout.
+9. Metrics Subsystem resets runtime analytics counters.
+10. System performs synchronization checks.
+11. System verifies subsystem readiness.
+12. System marks configuration as active.
+13. System confirms successful configuration application.
+14. System transitions to “Ready for Simulation” state.
+
+### Alternate Flows
+AF-01 — Reconfigure Existing Simulation
+1. User modifies configuration before simulation execution.
+2. System detects existing configuration.
+3. System clears previous configuration state.
+4. System applies updated configuration.
+5. System synchronizes all dependent subsystems.
+6. System activates new configuration.
+
+### AF-02 — Visualization Deferred Update
+1. Visualization subsystem is temporarily unavailable.
+2. System applies cache configuration.
+3. System queues visualization synchronization request.
+4. System maintains simulation readiness.
+5. Visualization updates are performed when subsystem becomes available.
+
+### AF-03 — Analytics Reset Only
+1. Configuration values remain unchanged.
+2. User requests simulation restart.
+3. System reuses existing configuration.
+4. Metrics subsystem resets counters.
+5. Simulation returns to ready state.
+
+### Failure Flows
+FF-01 — Cache Initialization Failure
+1. Cache Subsystem fails to initialize.
+2. System terminates configuration workflow.
+3. System rolls back changes.
+4. System restores previous stable configuration.
+5. Error feedback is generated.
+
+### FF-02 — AddressMapper Synchronization Failure
+1. AddressMapper fails to update decomposition settings.
+2. System halts configuration application.
+3. System rolls back subsystem updates.
+4. System restores previous stable configuration.
+5. User receives synchronization error.
+
+### FF-03 — Visualization Synchronization Failure
+1. Visualization subsystem fails to synchronize.
+2. System logs synchronization error.
+3. System preserves previous visualization state.
+4. System determines whether simulation can continue safely.
+5. User receives warning notification.
+
+### FF-04 — Metrics Initialization Failure
+1. Metrics subsystem fails to initialize.
+2. System aborts configuration activation.
+3. System restores previous stable state.
+4. Error information is logged.
+5. User receives failure notification.
+
+### FF-05 — Partial Subsystem Update Failure
+1. One or more subsystems fail during synchronization.
+2. System detects inconsistent state.
+3. Rollback process begins.
+4. All modified subsystems revert to previous stable state.
+5. System reports configuration failure.
+
+## Business Rules
+
+| ID    | Rule                                                                        |
+| :---  | :---                                                                        |
+| BR-01 | Only validated configurations may be applied.                               |
+| BR-02 | Configuration application must be atomic.                                   |
+| BR-03 | All dependent subsystems must remain synchronized.                          |
+| BR-04 | Configuration updates must preserve deterministic simulation behavior.      |
+| BR-05 | Failed updates must not leave the system in a partially configured state.   |
+| BR-06 | Active simulation execution must not begin until synchronization completes. |
+
+## Validation Rules
+
+| ID    | Rule                                                                         |
+| :---  | :---                                                                         |
+| VR-01 | Configuration values must originate from a successful validation workflow.   |
+| VR-02 | Cache structures must match configured cache parameters.                     |
+| VR-03 | Address decomposition calculations must reflect active configuration values. |
+| VR-04 | Visualization layouts must align with active cache architecture.             |
+| VR-05 | Runtime analytics must reset when a new configuration becomes active.        |
+
+## Special Requirements
+* Configuration application must remain deterministic.
+* Configuration synchronization must complete within 500ms under normal operating conditions.
+* Rollback operations must restore the last known stable state.
+* Subsystem synchronization must support future extensibility.
+* Configuration workflows must remain independent from simulation execution logic.
+
+## Assumptions
+
+| ID   | Assumption                                                                  |
+| :--- | :---                                                                        |
+| A-01 | Configuration values have already passed validation.                        |
+| A-02 | All required subsystems are available.                                      |
+| A-03 | Simulation execution has not yet started.                                   |
+| A-04 | Supported replacement policies have corresponding strategy implementations. |
+
+## Frequency of Use
+### High
+This workflow occurs:
+* during initial simulation setup
+* during cache reconfiguration
+* during architecture experimentation
+* before every simulation session
+
+## Related Use Cases
+
+| Use Case ID                         | Relationship                                    |
+| :---                                | :---                                            |
+| UC-2.1 Configure Cache              | Initiates configuration workflow                |
+| UC-2.2 Validate Cache Configuration | Must complete successfully first                |
+| UC-2.4 Input Memory Address         | Depends on active configuration                 |
+| UC-2.5 Translate Address            | Uses configuration-derived decomposition values |
+
+## Subsystem Interactions
+
+| Subsystem                | Interaction                                            |
+| :---                     | :---                                                   |
+| Configuration Controller | Coordinates configuration application workflow.        |
+| Cache Subsystem          | Initializes cache structures and replacement metadata. |
+| AddressMapper Subsystem  | Updates tag/index/offset calculations.                 |
+| Visualization Subsystem  | Updates visual representations.                        |
+| Metrics Subsystem        | Resets analytics state.                                |
+
+## Traceability Mapping
+
+| Related Requirement | Mapping                          |
+| :---                | :---                             |
+| CFR-01              | Cache-size application           |
+| CFR-02              | Associativity application        |
+| CFR-03              | Block-size application           |
+| CFR-04              | Replacement-policy activation    |
+| CFR-05              | Configuration synchronization    |
+| CFR-06              | Simulation readiness preparation |
+
+## Acceptance Criteria
+* Cache configuration is successfully applied after validation.
+* Cache structures are initialized correctly.
+* AddressMapper synchronization is completed.
+* Visualization synchronization is completed.
+* Metrics initialization is completed.
+* Rollback behavior is documented and supported.
+* Alternate flows are documented.
+* Failure flows are documented.
+* Business rules are documented.
+* Traceability mappings are established.
+* Use case supports future SSD development.
+* Use case supports sequence-diagram generation.
+* Use case supports GRASP responsibility analysis.
+
+## Technical Notes
+* Align workflow with future ConfigurationController implementation.
+* Apply GRASP Controller principles when assigning responsibilities.
+* Preserve low coupling between configuration and simulation execution subsystems.
+* Use Strategy Pattern implementations for replacement-policy activation.
+* Treat configuration application as a transaction-like operation to support rollback and consistency.
+
+## Deliverables
+* Configuration application specification
+* Subsystem synchronization workflow documentation
+* Rollback strategy documentation
+* Alternate-flow documentation
+* Failure-flow documentation
+* Traceability mappings
+* SSD inputs
+* Sequence-diagram inputs
+* GRASP-analysis inputs
+* Future implementation guidance for ConfigurationController and subsystem orchestration
 
 ---
 
