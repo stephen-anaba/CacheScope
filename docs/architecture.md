@@ -1520,6 +1520,247 @@ This workflow occurs:
 * GRASP-analysis inputs
 * Future implementation guidance for ConfigurationController and subsystem orchestration
 
+# UC-2.4 — Input Memory Address
+
+## Overview
+Allow users to submit memory addresses for analysis and cache simulation. This use case serves as the entry point into the address-processing workflow and ensures that submitted addresses are properly formatted, validated, and prepared for translation and cache lookup operations.
+
+This use case establishes the workflow for:
+- imemory-address submission
+- address-format validation
+- input sanitization
+- error handling
+- address-processing initiation
+- preparation for address translation
+
+## Goal
+Allow a user to submit a memory address that can be safely processed, translated, and evaluated by the cache simulation system.
+
+## Primary Actor
+User
+
+## Supporting Actors
+
+| Actor                         | Responsibility                                     |
+| :---                          | :---                                               |
+| Address Processing Controller | Coordinates address-input workflow.                |
+| AddressMapper Subsystem       | Receives validated addresses for decomposition.    |
+| Visualization Subsystem       | Updates UI to reflect submitted address.           |
+| Cache Subsystem               | Receives translated address data for cache lookup. |
+
+## Trigger
+User enters a memory address and submits it for analysis.
+
+## Preconditions
+- CacheScope application is running.
+- A valid cache configuration has been applied (UC-2.3).
+- Address-input interface is available.
+- Simulation environment is initialized.
+
+## Postconditions
+### Success
+- Address is accepted by the system.
+- Address is sanitized and validated.
+- Address is forwarded for translation.
+- Address-processing workflow begins.
+
+### Failure
+- Invalid address is rejected.
+- Translation workflow does not begin.
+- Error feedback is displayed.
+- System remains in a stable state.
+
+### Main Success Scenario
+1. User navigates to the address-input interface.
+2. System displays address-entry controls.
+3. User enters a memory address.
+4. User submits the address.
+5. System receives the address.
+6. System sanitizes input.
+7. System validates address format.
+8. System verifies address length constraints.
+9. System accepts the address.
+10. System stores the submitted address.
+11. System forwards the address to the translation workflow.
+12. System confirms successful submission.
+
+### Alternate Flows
+#### AF-01 — Paste Address
+1. User pastes an address from clipboard.
+2. System sanitizes pasted input.
+3. System validates address format.
+4. Workflow continues with Main Success Scenario Step 8.
+
+#### AF-02 — Reuse Previously Submitted Address
+1. User selects a previously submitted address.
+2. System loads address into input field.
+3. User submits address.
+4. Workflow continues with Main Success Scenario Step 5.
+
+#### AF-03 — Batch Demonstration Mode (Future Enhancement)
+1. User selects multiple addresses.
+2. System queues addresses.
+3. System processes addresses sequentially.
+4. Results are displayed individually.
+
+### Failure Flows
+#### FF-01 — Empty Input
+1. User submits an empty field.
+2. System rejects request.
+3. System displays validation message.
+4. Workflow terminates.
+
+#### FF-02 — Invalid Hexadecimal Format
+1. User submits malformed hexadecimal address.
+2. System detects invalid characters.
+3. System rejects input.
+4. System displays corrective guidance.
+
+Example invalid values:
+```txt
+0xGH12
+12XYZ
+0x123G
+```
+#### FF-03 — Unsupported Address Length
+1. User submits address exceeding supported length.
+2. System rejects address.
+3. System displays compatibility message.
+4. Workflow terminates.
+
+#### FF-04 — Configuration Not Initialized
+1. User submits address before cache configuration exists.
+2. System blocks address processing.
+3. System requests cache configuration.
+4. Workflow terminates.
+
+#### FF-05 — Internal Processing Failure
+1. System encounters unexpected processing error.
+2. Address submission fails.
+3. Error is logged.
+4. User receives failure notification.
+5. System remains operational.
+
+## Business Rules
+
+| ID    | Rule                                                              |
+| :---  | :---                                                              |
+| BR-01 | Memory addresses must be entered in supported hexadecimal format. |
+| BR-02 | Addresses must satisfy configured address-width constraints.      |
+| BR-03 | Invalid addresses must never enter translation workflows.         |
+| BR-04 | Submitted addresses must remain unchanged during processing.      |
+| BR-05 | Address input must remain independent from cache-lookup logic.    |
+
+## Validation Rules
+
+| ID    | Rule                                                    |
+| :---  | :---                                                    |
+| VR-01 | Address field cannot be empty.                          |
+| VR-02 | Address must contain valid hexadecimal characters only. |
+| VR-03 | Address must conform to supported address-width limits. |
+| VR-04 | Leading and trailing whitespace must be removed.        |
+| VR-05 | Address must be normalized before translation begins.   |
+
+## Input Data
+
+| Field          | Description                                |
+| :---           | :---                                       |
+| Memory Address | Hexadecimal address submitted by the user. |
+
+## Output Data
+
+| Output              | Description                                |
+| :---                | :---                                       |
+| Validated Address   | Sanitized address ready for translation.   |
+| Validation Feedback | Information describing validation results. |
+
+## Special Requirements
+* Address validation should complete within 100ms.
+* Validation feedback must be educational and beginner-friendly.
+* Address input workflow must remain deterministic.
+* Input handling must remain independent from cache-resolution logic.
+* Future address formats should be extensible without major redesign.
+
+## Assumptions
+
+| ID   | Assumption                                                  |
+| :--- | :---                                                        |
+| A-01 | User understands basic hexadecimal notation.                |
+| A-02 | Cache configuration already exists.                         |
+| A-03 | Address-processing subsystem is operational.                |
+| A-04 | Supported address width is defined by system configuration. |
+
+## Frequency of Use
+Very High
+This use case executes:
+* every simulation request
+* every address analysis request
+* every cache lookup operation
+* every educational visualization workflow
+
+## Related Use Cases
+
+| Use Case ID                         | Relationship                            |
+| :---                                | :---                                    |
+| UC-2.1 Configure Cache              | Must occur before address processing.   |
+| UC-2.2 Validate Cache Configuration | Must complete successfully first.       |
+| UC-2.3 Apply Cache Configuration    | Establishes active cache configuration. |
+| UC-2.5 Translate Address            | Follows successful address submission.  |
+| UC-2.6 Visualize Address Bits       | Uses translated address data.           |
+
+## Subsystem Interactions
+
+| Subsystem                     | Interaction                                                |
+| :---                          | :---                                                       |
+| Address Processing Controller | Coordinates address-input workflow.                        |
+| AddressMapper Subsystem       | Receives validated address.                                |
+| Visualization Subsystem       | Displays address-processing feedback.                      |
+| Cache Subsystem               | Receives translated address information later in workflow. |
+
+## Traceability Mapping
+
+| Related Requirement | Mapping                        |
+| :---                | :---                           |
+| CFR-07              | Address-input support          |
+| CFR-08              | Hexadecimal address validation |
+| CFR-09              | Invalid-input handling         |
+| CFR-10              | Address-processing initiation  |
+| CFR-11              | User feedback generation       |
+
+## Acceptance Criteria
+* Users can enter hexadecimal memory addresses.
+* Invalid addresses are rejected.
+* Valid addresses are accepted.
+* Validation feedback is displayed.
+* Alternate flows are documented.
+* Failure flows are documented.
+* Business rules are documented.
+* Validation rules are documented.
+* Addresses are forwarded to translation workflow.
+* Use case supports future SSD creation.
+* Use case supports sequence-diagram generation.
+* Use case supports GRASP responsibility analysis.
+
+## Technical Notes
+* Align workflow with future AddressProcessingController.
+* Preserve separation between input handling and translation logic.
+* Follow GRASP Controller principles.
+* Ensure low coupling between UI and backend processing.
+* Design for future support of additional address formats.
+
+## Deliverables
+* Address-input use case specification
+* Validation workflow documentation
+* Alternate-flow documentation
+* Failure-flow documentation
+* Business-rule documentation
+* Validation-rule documentation
+* Traceability mappings
+* SSD inputs
+* Sequence-diagram inputs
+* GRASP-analysis inputs
+* Future implementation guidance for AddressProcessingController and address-processing workflows
+
 ---
 
 # File Structure
