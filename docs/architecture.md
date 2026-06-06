@@ -1763,6 +1763,274 @@ This use case executes:
 
 ---
 
+# UC-2.5 — Translate Address
+## Overview
+Translate a validated memory address into its constituent cache-address components (tag, index, and block offset) based on the active cache configuration. This use case forms the core of the address-mapping subsystem and provides the information required for cache lookup, visualization, hit/miss determination, and replacement-policy execution.
+
+This use case establishes the workflow for:
+* hexadecimal-to-binary conversion
+* address decomposition
+* tag extraction
+* index extraction
+* offset extraction
+* cache mapping preparation
+* visualization data generation
+* cache-resolution preparation
+
+## Goal
+Convert a validated memory address into tag, index, and offset components according to the active cache configuration.
+
+## Primary Actor
+Address Processing Controller
+
+## Supporting Actors
+| Actor                   | Responsibility                                           |
+| :---                    | :---                                                     |
+| AddressMapper Subsystem | Performs address decomposition calculations.             |
+| Cache Subsystem         | Uses translated values for cache lookup.                 |
+| Visualization Subsystem | Displays translated address components.                  |
+| User                    | Initiates address processing through address submission. |
+
+## Trigger
+A valid memory address is received from UC-2.4 Input Memory Address.
+
+## Preconditions
+* UC-2.4 Input Memory Address completed successfully.
+* UC-2.3 Apply Cache Configuration completed successfully.
+* Active cache configuration exists.
+* Address value has passed validation.
+* AddressMapper subsystem is available.
+
+## Postconditions
+### Success
+* Address is translated into binary representation.
+* Tag bits are identified.
+* Index bits are identified.
+* Offset bits are identified.
+* Translation results are stored.
+* Results are forwarded to cache lookup and visualization workflows.
+
+### Failure
+* Translation process terminates safely.
+* Invalid translation results are discarded.
+* System remains in a stable state.
+* Error feedback is generated.
+
+### Main Success Scenario
+1. System receives validated memory address.
+2. System retrieves active cache configuration.
+3. System converts hexadecimal address into binary format.
+4. System calculates block-offset bit count.
+5. System calculates cache-index bit count.
+6. System calculates tag bit count.
+7. System partitions binary address.
+8. System extracts tag bits.
+9. System extracts index bits.
+10. System extracts offset bits.
+11. System generates translation result object.
+12. System stores translation results.
+13. System forwards results to cache-resolution workflow.
+14. System forwards results to visualization workflow.
+15. System confirms successful translation.
+
+### Alternate Flows
+#### AF-01 — Cached Translation Result
+1. System detects previously translated address.
+2. System verifies cache configuration has not changed.
+3. System retrieves cached translation result.
+4. System skips recalculation.
+5. Workflow continues at Step 12.
+
+#### AF-02 — Direct Educational Mode
+1. User enables educational mode.
+2. System performs standard translation.
+3. System generates intermediate calculations.
+4. System displays decomposition process.
+5. Workflow continues normally.
+
+#### AF-03 — Step-by-Step Visualization Mode
+1. User selects detailed visualization mode.
+2. System performs translation incrementally.
+3. System displays each decomposition stage.
+4. Workflow continues normally.
+
+### Failure Flows
+#### FF-01 — Missing Cache Configuration
+1. System requests active cache configuration.
+2. Configuration is unavailable.
+3. Translation workflow terminates.
+4. User receives configuration error.
+
+#### FF-02 — Invalid Bit Allocation
+1. System calculates decomposition values.
+2. Tag, index, and offset allocation is invalid.
+3. Translation is rejected.
+4. Error is logged.
+5. User receives feedback.
+
+#### FF-03 — Address Width Mismatch
+1. Address width differs from expected architecture width.
+2. Translation fails.
+3. Address is discarded.
+4. Workflow terminates.
+
+#### FF-04 — Binary Conversion Failure
+1. System attempts address conversion.
+2. Conversion process fails.
+3. Translation terminates.
+4. Error is logged.
+5. User receives notification.
+
+#### FF-05 — Internal AddressMapper Failure
+1. AddressMapper encounters unexpected error.
+2. Translation process aborts.
+3. Error information is logged.
+4. System preserves stable state.
+5. User receives failure notification.
+
+## Business Rules
+
+| ID    | Rule                                                                       |
+| :---  | :---                                                                       |
+| BR-01 | Translation must use the active cache configuration.                       |
+| BR-02 | Address decomposition must be deterministic.                               |
+| BR-03 | Tag, index, and offset calculations must be mathematically correct.        |
+| BR-04 | Translation results must remain immutable during lookup processing.        |
+| BR-05 | Invalid decomposition results must never reach cache-resolution workflows. |
+
+## Validation Rules
+
+| ID    | Rule                                                              |
+| :---  | :---                                                              |
+| VR-01 | Active cache configuration must exist.                            |
+| VR-02 | Address must already be validated.                                |
+| VR-03 | Bit allocations must sum to total address width.                  |
+| VR-04 | Address decomposition must produce valid tag/index/offset values. |
+| VR-05 | Translation output must match cache-architecture constraints.     |
+
+## Mathematical Rules
+### Offset Bits
+The number of offset bits is determined by:
+
+#### Number of Cache Sets
+The number of sets is determined by:
+	$$ \text{Sets} = \frac{\text{CacheSize}}{\text{BlockSize x Associativity}} $$
+
+#### Index Bits
+The number of index bits is determined by:
+
+#### Tag Bits
+	$$ \text{TagBits} = \frac{/text{AddressBits - IndexBits - OffsetBits}} $$ 
+
+## Input Data
+
+| Input          | Description                          |
+| :---           | :---                                 |
+| Memory Address | Validated hexadecimal memory address |
+| Cache Size     | Active cache size                    |
+| Associativity  | Active associativity value           |
+| Block Size     | Active block size                    |
+
+## Output Data
+
+| Output             | Description                      |
+| :---               | :---                             |
+| Binary Address     | Binary representation of address |
+| Tag Value          | Tag portion of address           |
+| Index Value        | Cache-set identifier             |
+| Offset Value       | Block-offset identifier          |
+| Translation Result | Complete decomposition object    |
+
+## Special Requirements
+* Translation must complete within 100ms under normal operating conditions.
+* Translation results must remain deterministic across repeated executions.
+* Address decomposition logic must remain independent from visualization rendering.
+* Translation workflows must support future cache architectures.
+* Mathematical calculations must remain implementation-independent.
+
+## Assumptions
+| ID   | Assumption                                              |
+| :--- | :---                                                    |
+| A-01 | Address has already passed validation.                  |
+| A-02 | Cache configuration is active.                          |
+| A-03 | AddressMapper subsystem is available.                   |
+| A-04 | Supported cache architecture constraints are satisfied. |
+
+## Frequency of Use
+Very High
+This use case executes:
+* for every submitted memory address
+* for every cache lookup
+* for every visualization update
+* for every simulation execution cycle
+
+## Related Use Cases
+
+| Use Case ID                   | Relationship                  |
+| UC-2.4 Input Memory Address   | Precedes translation workflow |
+| UC-2.6 Visualize Address Bits | Consumes translation output   |
+| UC-2.7 Search Cache Set       | Uses translated index value   |
+| UC-2.8 Detect Cache Hit       | Uses translation results      |
+| UC-2.9 Detect Cache Miss      | Uses translation results      |
+
+## Subsystem Interactions
+
+| Subsystem                     | Interaction                                |
+| :---                          | :---                                       |
+| Address Processing Controller | Coordinates translation workflow.          |
+| AddressMapper Subsystem       | Performs decomposition calculations.       |
+| Cache Subsystem               | Receives tag/index/offset values.          |
+| Visualization Subsystem       | Displays translated address information. |
+
+## Traceability Mapping
+
+| Related Requirement | Mapping                       |
+| :---                | :---                          |
+| CFR-12              | Address translation           |
+| CFR-13              | Binary conversion             |
+| CFR-14              | Tag extraction                |
+| CFR-15              | Index extraction              |
+| CFR-16              | Offset extraction             |
+| CFR-17              | Translation-result generation |
+
+## Acceptance Criteria
+* Hexadecimal addresses are translated successfully.
+* Binary conversion is documented.
+* Tag extraction is documented.
+* Index extraction is documented.
+* Offset extraction is documented.
+* Alternate flows are documented.
+* Failure flows are documented.
+* Mathematical rules are documented.
+* Traceability mappings are established.
+* Translation output supports cache-resolution workflows.
+* Use case supports SSD creation.
+* Use case supports sequence-diagram generation.
+* Use case supports GRASP responsibility analysis.
+
+## Technical Notes
+* Align workflow with future AddressMapper implementation.
+* Preserve separation between translation and visualization responsibilities.
+* Follow GRASP Information Expert principles for address decomposition.
+* Maintain low coupling between translation and cache-resolution logic.
+* Design for future support of multi-level cache architectures.
+
+## Deliverables
+* Address-translation use case specification
+* Address decomposition workflow documentation
+* Mathematical decomposition rules
+* Alternate-flow documentation
+* Failure-flow documentation
+* Business-rule documentation
+* Validation-rule documentation
+* Traceability mappings
+* SSD inputs
+* Sequence-diagram inputs
+* GRASP-analysis inputs
+* Future implementation guidance for AddressMapper subsystem
+
+---
+
 # File Structure
 ```text
 cache-scope/
