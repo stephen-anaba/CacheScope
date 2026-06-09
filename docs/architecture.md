@@ -2031,6 +2031,266 @@ This use case executes:
 
 ---
 
+# UC-2.6 — Visualize Address Bits
+
+## Overview
+Visualize the binary representation of a translated memory address by clearly displaying the tag, index, and offset fields. This use case supports CacheScope's educational objectives by helping users understand how memory addresses are mapped into cache structures and how cache configuration parameters influence address decomposition.
+
+This use case establishes the workflow for:
+* binary address visualization
+* tag-bit highlighting
+* index-bit highlighting
+* offset-bit highlighting
+* cache-mapping education
+* simulation feedback
+* address-analysis presentation
+
+## Goal
+Present a translated memory address in a visual format that clearly identifies the tag, index, and offset portions used during cache mapping.
+
+## Primary Actor
+User
+
+## Supporting Actors
+
+| Actor                    | Responsibility                                    |
+| :---                     | :---                                              |
+| Visualization Controller | Coordinates rendering workflows.                  |
+| AddressMapper Subsystem  | Provides address decomposition results.           |
+| Visualization Subsystem  | Renders visual representations of address fields. |
+| Cache Subsystem          | Provides cache-context information when required. |
+
+## Trigger
+Address translation completes successfully in UC-2.5 Translate Address.
+
+## Preconditions
+* UC-2.5 Translate Address completed successfully.
+* Binary address representation exists.
+* Tag, index, and offset values have been calculated.
+* Visualization subsystem is available.
+* Active cache configuration exists.
+
+## Postconditions
+### Success
+* Binary address is displayed.
+* Tag bits are highlighted.
+* Index bits are highlighted.
+* Offset bits are highlighted.
+* User can identify cache-mapping boundaries.
+
+### Failure
+* Visualization is not updated.
+* Previous stable visualization remains visible.
+* Error feedback is generated.
+* System remains operational.
+
+### Main Success Scenario
+1. System receives translated address information.
+2. System retrieves binary address representation.
+3. System retrieves tag boundaries.
+4. System retrieves index boundaries.
+5. System retrieves offset boundaries.
+6. Visualization Controller initiates rendering workflow.
+7. System displays binary address.
+8. System highlights tag-bit region.
+9. System highlights index-bit region.
+10. System highlights offset-bit region.
+11. System labels each address section.
+12. System displays calculated values.
+13. System updates visualization panel.
+14. User reviews visualization.
+15. System confirms successful rendering.
+
+### Alternate Flows
+#### AF-01 — Educational Walkthrough Mode
+1. User enables educational mode.
+2. System displays decomposition step-by-step.
+3. System explains tag extraction.
+4. System explains index extraction.
+5. System explains offset extraction.
+6. Visualization completes.
+
+#### AF-02 — Compact Display Mode
+1. User enables compact visualization.
+2. System reduces visual spacing.
+3. System preserves field boundaries.
+4. Visualization completes.
+
+#### AF-03 — Address Comparison Mode (Future Enhancement)
+1. User selects multiple translated addresses.
+2. System displays addresses side-by-side.
+3. System highlights decomposition differences.
+4. Visualization completes.
+
+#### Failure Flows
+FF-01 — Missing Translation Data
+1. Visualization workflow begins.
+2. Translation data cannot be located.
+3. Rendering process terminates.
+4. User receives error message.
+
+#### FF-02 — Rendering Failure
+1. Visualization subsystem encounters rendering error.
+2. Rendering process aborts.
+3. Previous stable visualization remains visible.
+4. Error is logged.
+
+#### FF-03 — Invalid Boundary Information
+1. Visualization receives invalid decomposition boundaries.
+2. Rendering is cancelled.
+3. System reports inconsistency.
+4. User receives feedback.
+
+#### FF-04 — Visualization Subsystem Unavailable
+1. Rendering request is initiated.
+2. Visualization subsystem is unavailable.
+3. Request is queued.
+4. User receives notification.
+
+## Business Rules
+
+| ID    | Rule                                                                       |
+| :---  | :---                                                                       |
+| BR-01 | Visualization must reflect the active cache configuration.                 |
+| BR-02 | Tag, index, and offset boundaries must be mathematically accurate.         |
+| BR-03 | Visualization must remain synchronized with translation results.           |
+| BR-04 | Address visualization must remain independent from cache-resolution logic. |
+| BR-05 | Visual representations must preserve decomposition accuracy.               |
+
+## Validation Rules
+
+| ID    | Rule                                                                |
+| :---  | :---                                                                |
+| VR-01 | Translation data must exist before rendering begins.                |
+| VR-02 | Bit boundaries must be valid.                                       |
+| VR-03 | Total displayed bits must equal address width.                      |
+| VR-04 | Visualization labels must match translated values.                  |
+| VR-05 | Rendered output must remain synchronized with active configuration. |
+
+## Visualization Model
+Example decomposition:
+
+Address: 0xABCD1234
+
+Binary:
+10101011110011010001001000110100
+
+|------- Tag -------|--- Index ---|- Offset -|
+1010101111001101000 10010 00110100
+
+The exact field lengths are determined by the active cache configuration and UC-2.5 translation calculations.
+
+## Input Data
+
+| Input               | Description                                  |
+| :---                | :---                                         |
+| Binary Address      | Binary representation of submitted address   |
+| Tag Value           | Tag field extracted during translation       |
+| Index Value         | Cache-set index extracted during translation |
+| Offset Value        | Block offset extracted during translation    |
+| Cache Configuration | Active cache parameters                      |
+
+## Output Data
+
+| Output                    | Description                    |
+| :---                      | :---                           |
+| Address Visualization     | Rendered binary address        |
+| Highlighted Tag Region    | Visual tag field               |
+| Highlighted Index Region  | Visual index field             |
+| Highlighted Offset Region | Visual offset field            |
+| Address Mapping View      | Complete decomposition display |
+
+## Special Requirements
+* Visualization updates should complete within 100ms.
+* Field boundaries must remain visually distinguishable.
+* Visualization must remain responsive across screen sizes.
+* Rendering logic must remain separate from simulation logic.
+* Visual output should support educational usage.
+* Future visualization enhancements should not require changes to translation logic.
+
+## Assumptions
+
+| ID   | Assumption                                              |
+| :--- | :---                                                    |
+| A-01 | Address translation completed successfully.             |
+| A-02 | Binary address representation exists.                   |
+| A-03 | Visualization subsystem is operational.                 |
+| A-04 | Cache configuration remains unchanged during rendering. |
+
+## Frequency of Use
+Very High
+
+This use case executes:
+* after every address translation
+* during educational demonstrations
+* during cache-analysis workflows
+* during simulation visualization updates
+
+## Related Use Cases
+
+| Use Case ID                 | Relationship                           |
+| :---                        | :---                                   |
+| UC-2.4 Input Memory Address | Originates address-processing workflow |
+| UC-2.5 Translate Address    | Provides decomposition data            |
+| UC-2.7 Search Cache Set     | Uses displayed index information       |
+| UC-2.10 Update Cache State  | May trigger visualization refreshes    |
+
+## Subsystem Interactions
+
+| Subsystem                | Interaction                                        |
+| :---                     | :---                                               |
+| Visualization Controller | Coordinates rendering workflow.                    |
+| AddressMapper Subsystem  | Supplies decomposition results.                    |
+| Visualization Subsystem  | Produces rendered output.                          |
+| Cache Subsystem          | Supplies contextual cache information when needed. |
+
+## Traceability Mapping
+
+| Related Requirement | Mapping                       |
+| :---                | :---                          |
+| CFR-18              | Binary address visualization  |
+| CFR-19              | Tag-field visualization       |
+| CFR-20              | Index-field visualization     |
+| CFR-21              | Offset-field visualization    |
+| CFR-22              | Visualization synchronization |
+| CFR-23              | Educational rendering support |
+
+## Acceptance Criteria
+* Binary address is displayed.
+* Tag region is highlighted.
+* Index region is highlighted.
+* Offset region is highlighted.
+* Field labels are displayed.
+* Alternate flows are documented.
+* Failure flows are documented.
+* Visualization rules are documented.
+* Traceability mappings are established.
+* Visualization accurately reflects translation results.
+* Use case supports SSD generation.
+* Use case supports sequence-diagram generation.
+* Use case supports GRASP responsibility analysis.
+
+## Technical Notes
+* Align workflow with future VisualizationController implementation.
+* Apply GRASP Controller principles for rendering coordination.
+* Apply Information Expert principles by keeping decomposition logic within AddressMapper.
+* Preserve low coupling between visualization and simulation subsystems.
+* Support future enhancements such as animation, side-by-side comparisons, and multi-level cache visualizations.
+
+## Deliverables
+* Address-visualization use case specification
+* Rendering workflow documentation
+* Visualization rules documentation
+* Alternate-flow documentation
+* Failure-flow documentation
+* Traceability mappings
+* SSD inputs
+* Sequence-diagram inputs
+* GRASP-analysis inputs
+* Future implementation guidance for VisualizationController and visualization subsystem design
+
+---
+
 # File Structure
 ```text
 cache-scope/
