@@ -1967,6 +1967,7 @@ This use case executes:
 ## Related Use Cases
 
 | Use Case ID                   | Relationship                  |
+| :---                          | :---                          |
 | UC-2.4 Input Memory Address   | Precedes translation workflow |
 | UC-2.6 Visualize Address Bits | Consumes translation output   |
 | UC-2.7 Search Cache Set       | Uses translated index value   |
@@ -2175,8 +2176,9 @@ Address: 0xABCD1234
 Binary:
 10101011110011010001001000110100
 
-|------- Tag -------|--- Index ---|- Offset -|
-1010101111001101000 10010 00110100
+| ------- Tag ------- | --- Index --- | - Offset - |
+| :---                | :---          | :---       |
+| 1010101111001101000 | 10010         | 00110100   |
 
 The exact field lengths are determined by the active cache configuration and UC-2.5 translation calculations.
 
