@@ -1914,8 +1914,7 @@ The number of offset bits is determined by:
 
 #### Number of Cache Sets
 The number of sets is determined by:
-$$ \text{Sets} = \frac{\text{CacheSize}{\text{BlockSize x Associativity}}} $$
-
+$$ \text{Sets} = \frac{\text{CacheSize}}{\text{Block Size x Associativity}} $$
 
 #### Index Bits
 The number of index bits is determined by:
