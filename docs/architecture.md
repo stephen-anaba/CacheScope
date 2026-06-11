@@ -15,7 +15,7 @@
 | CUC-11 | Execute FIFO Eviction  |
 | CUC-12 | Replace Cache Line     |
 | CUC-13 | Render Cache State     |
-| CUC-14 | Highligh Cache Events |
+| CUC-14 | Highlight Cache Events |
 | CUC-15 | Animate Evictions      |
 | CUC-16 | Calculate Hit Rate     |
 | CUC-17 | Calculate Miss Rate    |
@@ -1914,13 +1914,13 @@ The number of offset bits is determined by:
 
 #### Number of Cache Sets
 The number of sets is determined by:
-$$ \text{Sets} = \frac{\text{CacheSize}}{\text{Block Size x Associativity}} $$
+$$ \text{Sets} = \frac{\text{Cache Size}}{\text{Block Size} \times \text{Associativity}} $$
 
 #### Index Bits
 The number of index bits is determined by:
 
 #### Tag Bits
-$$ \text{TagBits} = \frac{\text{AddressBits - IndexBits - OffsetBits}} $$
+$$ \text{Tag Bits} = \text{Address Bits} - \text{Index Bits} - \text{Offset Bits} $$
 
 ## Input Data
 
