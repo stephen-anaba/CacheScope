@@ -2293,6 +2293,120 @@ This use case executes:
 
 ---
 
+# US-2.3 — Create Cache Resolution Use Cases
+## Overview
+Model cache-search, cache-hit detection, cache-miss detection, and cache-state update workflows to formally define how CacheScope determines whether a memory address exists within the cache and how the cache responds to lookup operations.
+
+This user story establishes the behavioral foundation for:
+* cache lookup operations
+* cache-set selection
+* tag comparison
+* hit detection
+* miss detection
+* cache-line allocation
+* replacement-policy execution
+* cache-state updates
+* simulation correctness
+* future SSD development
+* sequence-diagram modeling
+* GRASP responsibility analysis
+
+## User Story
+As a computer architecture student,
+I want CacheScope to determine whether a memory address results in a cache hit or cache miss,
+so that I can understand cache behavior, replacement policies, and memory-access performance.
+
+## Scope
+This user story covers:
+* cache-set lookup
+* tag comparison
+* cache-hit determination
+* cache-miss determination
+* cache-state updates
+* replacement-policy invocation
+* alternate execution paths
+* failure scenarios
+* subsystem interactions
+
+### This user story does not cover:
+* cache visualization rendering
+* runtime metrics analytics
+* multi-level cache hierarchies
+* coherence protocols
+* prefetching mechanisms
+* speculative execution
+
+## Actors
+
+| Actor                       | Description                              |
+| :---                        | :---                                     |
+| User                        | Submits memory addresses for analysis.   |
+| Cache Resolution Controller | Coordinates cache lookup workflows.      |
+| Cache Subsystem             | Stores cache sets and cache lines.       |
+| CacheSet                    | Performs set-level searches.             |
+| Replacement Policy          | Determines eviction candidates.          |
+| AddressMapper               | Provides translated address information. |
+
+## Business Rules
+
+| ID    | Rule                                                                    |
+| :---  | :---                                                                    |
+| BR-01 | Cache lookup must occur within the set identified by the address index. |
+| BR-02 | Cache hits require matching valid tag values.                           |
+| BR-03 | Cache misses must trigger cache-state updates.                          |
+| BR-04 | Replacement policies must determine eviction behavior.                  |
+| BR-05 | Cache-state updates must preserve simulation consistency.               |
+| BR-06 | Lookup results must remain deterministic.                               |
+
+## Use Cases
+
+| Use Case ID | Use Case           |
+| :---        | :---               |
+| UC-2.7      | Search Cache Set   |
+| UC-2.8      | Detect Cache Hit   |
+| UC-2.9      | Detect Cache Miss  |
+| UC-2.10     | Update Cache State |
+
+## Traceability Mapping
+
+| Use Case                   | Related Requirements               |
+| :---                       | :---                               |
+| UC-2.7 Search Cache Set    | CFR-24, CFR-25                     |
+| UC-2.8 Detect Cache Hit    | CFR-26, CFR-27                     |
+| UC-2.9                     | Detect Cache Miss	CFR-28, CFR-29 |
+| UC-2.10 Update Cache State | CFR-30, CFR-31                     |
+
+## Acceptance Criteria
+* Cache-resolution use cases are documented.
+* Main success scenarios are documented.
+* Alternate execution paths are documented.
+* Failure scenarios are documented.
+* Business rules are documented.
+* Actor/system responsibilities are clearly separated.
+* Traceability mappings are established.
+* Use cases support SSD generation.
+* Use cases support sequence-diagram generation.
+* Use cases support GRASP responsibility analysis.
+
+## Technical Notes
+* Align workflows with Cache, CacheSet, CacheLine, and ReplacementPolicy subsystems.
+* Preserve separation between cache-resolution logic and visualization logic.
+* Maintain deterministic simulation behavior.
+* Use these workflows as the foundation for SSDs, sequence diagrams, and design-class diagrams.
+
+## Deliverables
+* Cache-resolution use-case specifications
+* Alternate-flow documentation
+* Failure-flow documentation
+* Business-rule documentation
+* Traceability mappings
+* SSD inputs
+* Sequence-diagram inputs
+* GRASP-analysis inputs
+* Future implementation guidance
+
+---
+
 # File Structure
 ```text
 cache-scope/
