@@ -2607,6 +2607,276 @@ Hit or miss determination completes.
 
 ---
 
+# US-3.1 — Create System Sequence Diagrams (SSDs)
+## Overview
+Create System Sequence Diagrams (SSDs) for major CacheScope interactions to model external actor-to-system behavior before implementation begins.
+
+This user story establishes the system-level interaction contracts between users and CacheScope and defines:
+* actor → system communication
+* system events
+* inputs and outputs
+* operation sequencing
+* boundary responsibilities
+* behavioral validation
+* implementation guidance
+
+SSDs intentionally treat CacheScope as a single black-box system.
+Internal object collaboration belongs later in US-3.2 — Sequence Diagrams.
+
+## User Story
+As a software designer,
+I want to model user-to-system interactions before implementation,
+so that CacheScope behavior is formally defined and implementation remains traceable to requirements.
+
+## Objectives
+Create SSDs for the following primary workflows:
+1. Configure Cache
+2. Submit Memory Address
+3. Visualization Update
+
+## Scope
+#### Included:
+* external actor interactions
+* system events
+* responses
+* validation feedback
+* state transitions
+* alternate execution paths
+#### Excluded:
+* internal object communication
+* class responsibilities
+* algorithm implementation
+* replacement-policy internals
+
+## Primary Actor
+User
+
+## Supporting System
+CacheScope
+
+## Inputs
+
+| Input               |
+| :---                |
+| Cache configuration |
+| Memory address      |
+| Simulation commands |
+
+## Outputs
+
+| Output                |
+| :---                  |
+| Validation result     |
+| Translation result    |
+| Visualization update  |
+| Cache hit/miss result |
+| Simulation feedback   |
+
+## Business Rules
+
+| ID        | Rule                                               |
+| :---      | :---                                               |
+| BR-SSD-01 | SSDs represent only actor-to-system interactions.  |
+| BR-SSD-02 | Internal subsystem behavior must not appear.       |
+| BR-SSD-03 | SSD operations must align with use cases.          |
+| BR-SSD-04 | SSD operations become candidate system operations. |
+| BR-SSD-05 | All SSDs must remain implementation-independent.   |
+
+## SSD-1 — Configure Cache
+### Related Use Cases
+* UC-2.1 Configure Cache
+* UC-2.2 Validate Cache Configuration
+* UC-2.3 Apply Cache Configuration
+
+## Goal
+Configure cache parameters and prepare simulation.
+
+## System Events
+
+| Actor                                                       | System                        |
+| :---                                                        | :---                          |
+| openConfiguration()                                         |                               |
+| configureCache(cacheSize, associativity, blockSize, policy) |                               |
+|                                                             | validateConfiguration()       |
+|                                                             | applyConfiguration()          |
+|                                                             | initializeSimulation()        |
+|                                                             | displayConfigurationSuccess() |
+
+## SSD Representation
+
+User                         CacheScope
+ |                                                                                     |
+ | ---- openConfiguration() ------>                                                    |
+ |                                                                                     |
+ | ---- configureCache(cacheSize, associativity, blockSize, replacementPolicy) ------> |
+ |                                                                                     |
+ | <--- requestValidation() -------                                                    |
+ |                                                                                     |
+ | <--- configurationValid --------                                                    |
+ |                                                                                     |
+ | <--- configurationApplied ------                                                    |
+ |                                                                                     |
+ | <--- simulationReady -----------                                                    |
+
+
+## Alternate Flow
+Invalid configuration:
+
+User                         CacheScope
+ |                                                                                     |
+ | ---- configureCache(cacheSize, associativity, blockSize, replacementPolicy) ------> |
+ |                                                                                     |
+ | <--- validationError -----------                                                    |
+
+
+## Failure Conditions
+* invalid cache size
+* invalid associativity
+* invalid block size
+* unsupported policy
+
+## SSD-2 — Submit Memory Address
+Related Use Cases
+* UC-2.4 Input Memory Address
+* UC-2.5 Translate Address
+* UC-2.7 Search Cache Set
+* UC-2.8 Detect Cache Hit
+* UC-2.9 Detect Cache Miss
+* UC-2.10 Update Cache State
+
+## Goal
+Submit and process memory address through cache-resolution workflow.
+
+## System Events
+
+Actor	System
+inputAddress(address)	
+	validateAddress()
+	translateAddress()
+	searchCache()
+	determineHitMiss()
+	updateCacheState(setIndex, cacheLine, replacementMetadata)
+	returnResult()
+
+## SSD Representation
+
+User                         CacheScope
+ |                                     |
+ | ---- inputAddress(memAddr) -------> |
+ |                                     |
+ | <--- addressAccepted -----------    |
+ |                                     |
+ | <--- addressTranslated ---------    |
+ |                                     |
+ | <--- cacheLookupComplete -------    |
+ |                                     |
+ | <--- hitMissResult -------------    |
+ |                                     |
+ | <--- cacheUpdated --------------    |
+
+
+## Alternate Flow
+
+### Invalid address:
+
+User                         CacheScope
+ |                                  |
+ | ---- inputAddress(memoryAddr) -------> |
+ |                                  |
+ | <--- invalidAddress ------------ |
+
+
+## Failure Conditions
+* malformed address
+* translation failure
+* lookup failure
+* cache update failure
+
+## SSD-3 — Visualization Update
+Related Use Cases
+* UC-2.6 Visualize Address Bits
+
+## Goal
+Present translated address information visually.
+
+## System Events
+
+Actor	System
+requestVisualization()	
+	generateVisualization()
+	renderAddressBits()
+	updateUI()
+	displayResults()
+
+## SSD Representation
+
+User                         CacheScope
+ |                                |
+ |---- requestVisualization() --->|
+ |                                |
+ |<--- visualizationStarted ------|
+ |                                |
+ |<--- addressRendered -----------|
+ |                                |
+ |<--- uiUpdated -----------------|
+
+
+## Alternate Flow
+
+Educational mode:
+
+User                         CacheScope
+ |                                |
+ |---- enableWalkthrough() ------>|
+ |                                |
+ |<--- decompositionDisplayed ----|
+
+
+## Failure Conditions
+* visualization unavailable
+* rendering error
+* synchronization error
+
+## SSD Validation Checklist
+
+Check	Status
+Every SSD maps to use cases	Required
+System treated as black box	Required
+Internal objects excluded	Required
+Actor events defined	Required
+Outputs defined	Required
+Alternate flows included	Required
+Traceability Mapping
+SSD	Source
+SSD-1 Configure Cache	US-1.1, UC-2.1–UC-2.3
+SSD-2 Submit Memory Address	US-1.2, UC-2.4–UC-2.10
+SSD-3 Visualization Update	US-1.5, UC-2.6
+Acceptance Criteria
+* SSDs exist for major workflows.
+* Actor/system messages are defined.
+* SSDs align with use cases.
+* Alternate flows are documented.
+* Failure conditions are documented.
+* SSDs remain implementation-independent.
+* Traceability is established.
+
+## Technical Notes
+* Keep SSDs in docs/ssd.md
+* These SSDs become inputs to:
+    * US-3.2 Sequence Diagrams
+    * US-3.3 Design Class Diagram
+    * US-3.4 GRASP Analysis
+    * Operation Contracts
+
+## Deliverables
+* System Sequence Diagram specifications
+* Actor/system interaction definitions
+* Event catalog
+* Traceability documentation
+* Inputs for internal design artifacts
+
+---
+
 # File Structure
 ```text
 cache-scope/
@@ -2681,9 +2951,27 @@ cache-scope/
 │   └── README.md
 │
 ├── docs/
+│   ├── requirements/
+│   |   ├── cfr.md
+│   |   ├── clfr.md
+│   |   ├── traceability.md
+|   |
+|   ├── use-cases/
+|   ├── uc-2.md
+|
+│   ├── analysis/
+|   |   ├── ssd.md
+|   |   ├── operation-contracts.md
+|   |
+│   ├── design/
+|   |   ├── sequence-diagrams.md
+|   |   ├── class-diagram.md
+|   |   ├── grasp.md
+|   |   ├── package-diagram.md
+|   |
 │   ├── architecture.md
-│   ├── api-spec.md
-│   └── screenshots/
+│   └── decisions/
+|       ├── adr-001-design-first.md
 │
 ├── .gitignore
 ├── README.md
