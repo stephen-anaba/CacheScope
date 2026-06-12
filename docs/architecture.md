@@ -1914,6 +1914,7 @@ The number of offset bits is determined by:
 
 #### Number of Cache Sets
 The number of sets is determined by:
+
 $$ \text{Sets} = \frac{\text{Cache Size}}{\text{Block Size} \times \text{Associativity}} $$
 
 #### Index Bits
@@ -2476,6 +2477,46 @@ A translated address becomes available from UC-2.5.
 * UC-2.5 Translate Address
 * UC-2.8 Detect Cache Hit
 * UC-2.9 Detect Cache Miss
+
+---
+
+# UC-2.8 — Detect Cache Hit
+## Goal
+Determine whether a cache line exists whose tag matches the translated address tag.
+
+## Primary Actor
+Cache Resolution Controller
+
+## Trigger
+Cache-set search completes successfully.
+
+## Main Success Scenario
+1. System receives candidate cache lines.
+2. System compares line tags against address tag.
+3. System identifies matching valid line.
+4. System classifies lookup as cache hit.
+5. System records hit result.
+6. System invokes cache-state update workflow.
+7. System reports hit outcome.
+
+## Alternate Flows
+### AF-01 — Multiple Tag Comparisons
+* Multiple lines are inspected before a match is found.
+* Workflow continues normally.
+
+## Failure Flows
+### FF-01 — Corrupted Tag Metadata
+* Tag comparison cannot be completed.
+* Lookup terminates.
+* Error is generated.
+
+## Business Rules
+* Matching tag and valid bit are required.
+* Hit classification must be deterministic.
+
+## Related Use Cases
+* UC-2.7 Search Cache Set
+* UC-2.10 Update Cache State
 
 ---
 
