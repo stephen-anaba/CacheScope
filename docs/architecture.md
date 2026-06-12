@@ -2407,6 +2407,42 @@ This user story covers:
 
 ---
 
+# UC-2.7 — Search Cache Set
+## Goal
+Locate the cache set corresponding to the translated address and determine whether a matching cache line exists.
+
+## Primary Actor
+Cache Resolution Controller
+
+## Trigger
+A translated address becomes available from UC-2.5.
+
+## Main Success Scenario
+1. System receives translated address.
+2. System extracts index value.
+3. System locates corresponding cache set.
+4. System retrieves cache lines within the set.
+5. System forwards lines for tag comparison.
+6. System completes cache-set search.
+
+## Alternate Flows
+### AF-01 — Empty Cache Set
+* Cache set contains no valid lines.
+* Workflow proceeds to UC-2.9 Detect Cache Miss.
+
+## Failure Flows
+### FF-01 — Invalid Set Index
+* System detects invalid index.
+* Search terminates.
+* Error is logged.
+
+## Related Use Cases
+* UC-2.5 Translate Address
+* UC-2.8 Detect Cache Hit
+* UC-2.9 Detect Cache Miss
+
+---
+
 # File Structure
 ```text
 cache-scope/
