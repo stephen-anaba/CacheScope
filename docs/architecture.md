@@ -2520,6 +2520,45 @@ Cache-set search completes successfully.
 
 ---
 
+# UC-2.9 — Detect Cache Miss
+## Goal
+Determine that no matching cache line exists and initiate miss handling.
+
+## Primary Actor
+Cache Resolution Controller
+
+## Trigger
+Cache-set search completes without finding a matching tag.
+
+## Main Success Scenario
+1. System receives cache-search results.
+2. System determines no matching tag exists.
+3. System classifies lookup as cache miss.
+4. System identifies available line or eviction candidate.
+5. System records miss result.
+6. System invokes cache-state update workflow.
+7. System reports miss outcome.
+
+## Alternate Flows
+### AF-01 — Empty Cache Line Available
+* Empty line is located.
+* No eviction required.
+
+### AF-02 — Full Set**
+* No empty lines exist.
+* Replacement policy is invoked.
+
+## Failure Flows
+### FF-01 — Replacement Policy Failure
+* Eviction candidate cannot be determined.
+* Miss handling terminates.
+
+## Related Use Cases
+* UC-2.7 Search Cache Set
+* UC-2.10 Update Cache State
+
+---
+
 # File Structure
 ```text
 cache-scope/
