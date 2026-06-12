@@ -2559,6 +2559,54 @@ Cache-set search completes without finding a matching tag.
 
 ---
 
+# UC-2.10 — Update Cache State
+## Goal
+Update cache metadata and contents following hit or miss resolution.
+
+## Primary Actor
+Cache Resolution Controller
+
+## Supporting Actors
+* Cache Subsystem
+* Replacement Policy
+
+## Trigger
+Hit or miss determination completes.
+
+## Main Success Scenario
+1. System receives lookup result.
+2. System determines required update.
+3. System updates replacement metadata.
+4. System updates cache contents if necessary.
+5. System synchronizes cache state.
+6. System records operation outcome.
+7. System completes update workflow.
+
+## Alternate Flows
+### AF-01 — Cache Hit
+* Metadata only is updated.
+### AF-02 — Cache Miss with Empty Line**
+* New cache line is populated.
+### AF-03 — Cache Miss with Eviction**
+* Replacement policy selects victim line.
+* Victim line is replaced.
+
+## Failure Flows
+### FF-01 — Cache Write Failure
+* Cache update cannot complete.
+* State rollback occurs.
+
+## Business Rules
+* Cache consistency must be preserved.
+* Replacement metadata must remain synchronized.
+* Updates must remain deterministic.
+
+## Related Use Cases
+* UC-2.8 Detect Cache Hit
+* UC-2.9 Detect Cache Miss
+
+---
+
 # File Structure
 ```text
 cache-scope/
