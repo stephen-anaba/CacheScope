@@ -81,7 +81,7 @@ AddressMapper
 ## Main Success Scenario
 
 <div align='center'>
-  <img src="../images/us3.2-sd2-MainSuccessScenario.png" height='400' alt="US-3.2 Main Success Scenario">
+  <img src="../images/us3.2-sd2-MainSuccesScenario.png" height='400' alt="US-3.2 Main Success Scenario">
   <p><b>Fig. 2:</b> SD-2 Main Success Scenario </p>
 </div>
 
@@ -111,41 +111,6 @@ Metrics
 ```
 
 ## Main Success Scenario
-```txt
-AddressProcessingController
- |
- | translatedAddress
- v
-CacheResolutionController
- |
- | search(index)
- v
-Cache
- |
- | getSet(index)
- v
-CacheSet
- |
- | findMatchingTag(tag)
- v
-CacheLine
- |
- | tagMatch=true
- v
-CacheSet
- |
- v
-CacheResolutionController
- |
- | recordHit()
- +----> Metrics
- |
- | updateMetadata()
- +----> ReplacementPolicy
- |
- v
-result=HIT
-```
 
 <div align='center'>
   <img src="../images/us3.2-sd3-MainSuccessScenario.png" height='400' alt="US-3.2 SD">
@@ -172,28 +137,7 @@ Metrics
 ```
 
 ## Main Success Scenario
-```txt
-CacheResolutionController
- |
- | search(index)
- v
-CacheSet
- |
- | findEmptyLine()
- v
-CacheLine
- |
- | allocate(tag)
- |
- v
-CacheResolutionController
- |
- | recordMiss()
- +----> Metrics
- |
- v
-result=MISS
-```
+
 <div align='center'>
   <img src="../images/us3.2-sd4-MainSuccessScenario.png" height='400' alt="US-3.2 SD4">
   <p><b>Fig. 4:</b> SD-4 Main Success Scenario </p>
@@ -215,35 +159,7 @@ Metrics
 ```
 
 ## Main Success Scenario
-```txt
-CacheResolutionController
- |
- | search(index)
- v
-CacheSet
- |
- | noEmptyLine
- |
- v
-ReplacementPolicy
- |
- | selectVictim()
- |
- v
-CacheLine
- |
- | replace()
- |
- v
-CacheResolutionController
- |
- | updateMetadata()
- |
- +----> Metrics
- |
- v
-result=MISS_EVICTION
-```
+
 <div align='center'>
   <img src="../images/us3.2-sd5-MainSuccessScenario.png" height='400' alt="US-3.2 SD5">
   <p><b>Fig. 5:</b> SD-5 Main Success Scenario </p>
@@ -271,33 +187,7 @@ CacheVisualizationView
 ```
 
 ## Main Success Scenario
-```txt
-User
- |
- | requestVisualization()
- v
-VisualizationController
- |
- | getTranslationData()
- v
-AddressMapper
- |
- | translationResult
- v
-VisualizationController
- |
- | render()
- v
-CacheVisualizationView
- |
- | displayAddressBits()
- |
- | displayTag()
- |
- | displayIndex()
- |
- | displayOffset()
-```
+
 <div align='center'>
   <img src="../images/us3.2-sd6-MainSuccessScenario.png" height='400' alt="US-3.2 SD6">
   <p><b>Fig. 6:</b> SD-6 Main Success Scenario </p>
