@@ -1,14 +1,13 @@
 # Project Kanban Board Status
-Generated automatically on Fri Jun 12 07:15:10 UTC 2026
+Generated automatically on Tue Jun 16 07:57:20 UTC 2026
 
 ## 📋 To Do
-* [ ] US-3.1 — Create System Sequence Diagrams (SSDs)
 * [ ] US-3.2 — Create Sequence Diagrams
 * [ ] US-3.3 — Create Design Class Diagrams
 * [ ] US-3.4 — Apply GRASP Principles
 
 ## 🚧 In Progress
-* [ ] US-2.3 — Create Cache Resolution Use Cases
+* [ ] US-3.1 — Create System Sequence Diagrams (SSDs)
 
 ## ✅ Done
 * [x] US 1.1: Define cache Configuration Requirements
@@ -19,3 +18,4 @@ Generated automatically on Fri Jun 12 07:15:10 UTC 2026
 * [x] US-1.6 — Define Metrics & Analytics Requirements
 * [x] US-2.1 — Create Cache Configuration Use Cases
 * [x] US-2.2 — Create Address Processing Use Cases
+* [x] US-2.3 — Create Cache Resolution Use Cases
