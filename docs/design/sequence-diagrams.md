@@ -48,9 +48,74 @@ Metrics
 ```
 
 ## Main Success Scenario.
+```txt
+@startuml
+<style>
+sequenceDiagram {
+  participant {
+    Padding 10
+  }
+  box {
+    Padding 10
+  }
+}
+</style>
+
+skinparam maxMessageSize 100
+
+actor User
+participant "CacheConfigurationView" as View <<boundary>>
+participant "ConfigurationController" as Controller <<control>>
+participant "Cache" as Cache 
+participant "AddressMapper" as Mapper
+participant "Metrics" as Metrics
+participant "VisualizationController" as Viz
+
+User -> View : configureCache()
+activate View
+
+View -> Controller : submitConfiguration()
+activate Controller
+
+Controller -> Cache : validate()
+activate Cache
+Cache --> Controller : configurationValid
+deactivate Cache
+
+Controller -> Cache : applyConfiguration()
+activate Cache
+
+Cache -> Mapper : map()
+activate Mapper
+Mapper --> Cache : mapped
+deactivate Mapper
+
+Cache -> Metrics : track()
+activate Metrics
+Metrics --> Cache : tracked
+deactivate Metrics
+
+Cache -> Viz : updateVisualization()
+activate Viz
+Viz --> Cache : updated
+deactivate Viz
+
+Cache --> Controller : configurationApplied
+deactivate Cache
+
+Controller --> View : configurationSuccess
+deactivate Controller
+
+View -> View : displayReady()
+activate View
+deactivate View
+
+@enduml
+
+```
 
 <div align='center'>
-  <img src="docs/images/us3.2-sd1-MainSuccessScenario.png" height='400' alt="US-3.2 Main Success Scenario">
+  <img src="../images/us3.2-sd1-MainSuccessScenario.png" height='400' alt="US-3.2 Main Success Scenario">
   <p><b>Fig. 1:</b> Main Success Scenario </p>
 </div>
 
