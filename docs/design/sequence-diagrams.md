@@ -47,7 +47,7 @@ VisualizationController
 Metrics
 ```
 
-## Main Success Scenario.
+## Main Success Scenario
 
 <div align='center'>
   <img src="../images/us3.2-sd1-MainSuccessScenario.png" height='400' alt="US-3.2 Main Success Scenario">
@@ -79,64 +79,11 @@ AddressMapper
 ```
 
 ## Main Success Scenario
-```txt
-User
- |
- | inputAddress()
- v
-AddressInputView
- |
- | submitAddress()
- v
-AddressProcessingController
- |
- | translate()
- v
-AddressMapper
- |
- | extractTag()
- |
- | extractIndex()
- |
- | extractOffset()
- |
- v
-AddressProcessingController
- |
- | translationResult
- v
-AddressInputView
-```
 
-@startuml
-skinparam maxMessageSize 150
-
-actor User
-participant "AddressInputView" as View
-participant "AddressProcessingController" as Controller
-participant "AddressMapper" as Mapper
-
-User -> View : inputAddress()
-activate View
-
-View -> Controller : submitAddress()
-activate Controller
-
-Controller -> Mapper : translate()
-activate Mapper
-
-Mapper -> Mapper : extractTag()
-Mapper -> Mapper : extractIndex()
-Mapper -> Mapper : extractOffset()
-
-Mapper --> Controller : translationResult
-deactivate Mapper
-
-Controller --> View : translationResult
-deactivate Controller
-
-deactivate View
-@enduml
+<div align='center'>
+  <img src="../images/us3.2-sd2-MainSuccessScenario.png" height='400' alt="US-3.2 Main Success Scenario">
+  <p><b>Fig. 2:</b> SD-2 Main Success Scenario </p>
+</div>
 
 ## Responsibility Assignment
 
@@ -200,6 +147,11 @@ CacheResolutionController
 result=HIT
 ```
 
+<div align='center'>
+  <img src="../images/us3.2-sd3-MainSuccessScenario.png" height='400' alt="US-3.2 SD">
+  <p><b>Fig. 3:</b> SD-3 Main Success Scenario </p>
+</div>
+
 ## GRASP Notes
 * CacheResolutionController = Controller
 * CacheSet = Information Expert
@@ -227,8 +179,6 @@ CacheResolutionController
  v
 CacheSet
  |
- | noMatchingTag
- |
  | findEmptyLine()
  v
 CacheLine
@@ -244,6 +194,10 @@ CacheResolutionController
  v
 result=MISS
 ```
+<div align='center'>
+  <img src="../images/us3.2-sd4-MainSuccessScenario.png" height='400' alt="US-3.2 SD4">
+  <p><b>Fig. 4:</b> SD-4 Main Success Scenario </p>
+</div>
 
 ## SD-5 — Cache Miss Resolution (Eviction Required)
 #### Related Use Cases
@@ -290,6 +244,10 @@ CacheResolutionController
  v
 result=MISS_EVICTION
 ```
+<div align='center'>
+  <img src="../images/us3.2-sd5-MainSuccessScenario.png" height='400' alt="US-3.2 SD5">
+  <p><b>Fig. 5:</b> SD-5 Main Success Scenario </p>
+</div>
 
 ## GRASP Notes
 
@@ -340,6 +298,10 @@ CacheVisualizationView
  |
  | displayOffset()
 ```
+<div align='center'>
+  <img src="../images/us3.2-sd6-MainSuccessScenario.png" height='400' alt="US-3.2 SD6">
+  <p><b>Fig. 6:</b> SD-6 Main Success Scenario </p>
+</div>
 
 ## Sequence Diagram → Class Mapping
 
