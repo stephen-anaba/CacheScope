@@ -128,14 +128,15 @@ Submit and process memory address through cache-resolution workflow.
 
 ## System Events
 
-Actor	System
-inputAddress(address)	
-	validateAddress()
-	translateAddress()
-	searchCache()
-	determineHitMiss()
-	updateCacheState(setIndex, cacheLine, replacementMetadata)
-	returnResult()
+| Actor                 | System             |
+| :---                  | :---               |
+| inputAddress(address) |                    |
+|                       | validateAddress()  |
+|                       | translateAddress() |
+|                       | searchCache()      |
+|                       | determineHitMiss() |
+|                       | updateCacheState() |
+|                       | returnResult()     |
 
 ## SSD Representation
 
