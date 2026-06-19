@@ -103,14 +103,8 @@ Configure cache parameters and prepare simulation.
 ## Alternate Flow
 Invalid configuration:
 
-User                         CacheScope
- |                                                                                     |
- | ---- configureCache(cacheSize, associativity, blockSize, replacementPolicy) ------> |
- |                                                                                     |
- | <--- validationError -----------                                                    |
-
 <div align='center'>
-  <img src="../images/us3.1-ssd1-AlternateScenario.png" height='400' alt="US-3.1 SSD1 Alternate Scenario">
+  <img src="../images/us3.1-ssd106.png" height='400' alt="US-3.1 SSD1 Alternate Scenario">
   <p><b>Fig. 2:</b> Configure Cache - Alternate Scenario </p>
 </div>
 
@@ -145,35 +139,14 @@ inputAddress(address)
 
 ## SSD Representation
 
-User                         CacheScope
- |                                     |
- | ---- inputAddress(memAddr) -------> |
- |                                     |
- | <--- addressAccepted -----------    |
- |                                     |
- | <--- addressTranslated ---------    |
- |                                     |
- | <--- cacheLookupComplete -------    |
- |                                     |
- | <--- hitMissResult -------------    |
- |                                     |
- | <--- cacheUpdated --------------    |
-
-
 <div align='center'>
-  <img src="../images/us3.1-ssd148.png" height='400' alt="US-3.1 SSD2 Main Success Scenario">
+  <img src="../images/us3.1-ssd142.png" height='400' alt="US-3.1 SSD2 Main Success Scenario">
   <p><b>Fig. 3:</b> Submit Memory Address - Main Success Scenario </p>
 </div>
 
 ## Alternate Flow
 
 ### Invalid address:
-
-User                         CacheScope
- |                                  |
- | ---- inputAddress(memoryAddr) -------> |
- |                                  |
- | <--- invalidAddress ------------ |
 
 <div align='center'>
   <img src="../images/us3.1-ssd177.png" height='400' alt="US-3.1 SSD2 Alternate Flow">
@@ -204,16 +177,6 @@ requestVisualization()
 
 ## SSD Representation
 
-User                         CacheScope
- |                                |
- |---- requestVisualization() --->|
- |                                |
- |<--- visualizationStarted ------|
- |                                |
- |<--- addressRendered -----------|
- |                                |
- |<--- uiUpdated -----------------|
-
 <div align='center'>
   <img src="../images/us3.1-ssd206.png" height='400' alt="US-3.1 SSD3 Main Success Scenario">
   <p><b>Fig. 5:</b> Visualization Update - Main Success Scenario </p>
@@ -222,12 +185,6 @@ User                         CacheScope
 ## Alternate Flow
 
 Educational mode:
-
-User                         CacheScope
- |                                |
- |---- enableWalkthrough() ------>|
- |                                |
- |<--- decompositionDisplayed ----|
 
 <div align='center'>
   <img src="../images/us3.1-ssd225.png" height='400' alt="US-3.1 SSD3 Alternate Flow">
