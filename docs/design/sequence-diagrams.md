@@ -95,6 +95,7 @@ Configure cache parameters and prepare simulation.
 
 ## SSD Representation
 
+<<<<<<< HEAD
 User                         CacheScope
  |                                                                                     |
  | ---- openConfiguration() ------>                                                    |
@@ -109,6 +110,12 @@ User                         CacheScope
  |                                                                                     |
  | <--- simulationReady -----------                                                    |
 
+=======
+<div align='center'>
+  <img src="../images/us3.1-ssd98.png" height='400' alt="US-3.1 SSD Configure Cache">
+  <p><b>Fig. 1:</b> Configure Cache - Main Success Scenario </p>
+</div>
+>>>>>>> 73d25b6 (docs(design/us-3.1 & docs/images & architecture.md): Moved us-3.1 from docs/architecture.md to docs/design. Added SSDs to us-3.1 in docs/design)
 
 ## Alternate Flow
 Invalid configuration:
@@ -119,6 +126,13 @@ User                         CacheScope
  |                                                                                     |
  | <--- validationError -----------                                                    |
 
+<<<<<<< HEAD
+=======
+<div align='center'>
+  <img src="../images/us3.1-ssd1-AlternateScenario.png" height='400' alt="US-3.1 SSD1 Alternate Scenario">
+  <p><b>Fig. 2:</b> Configure Cache - Alternate Scenario </p>
+</div>
+>>>>>>> 73d25b6 (docs(design/us-3.1 & docs/images & architecture.md): Moved us-3.1 from docs/architecture.md to docs/design. Added SSDs to us-3.1 in docs/design)
 
 ## Failure Conditions
 * invalid cache size
@@ -165,6 +179,13 @@ User                         CacheScope
  |                                     |
  | <--- cacheUpdated --------------    |
 
+<<<<<<< HEAD
+=======
+<div align='center'>
+  <img src="../images/us3.1-ssd148.png" height='400' alt="US-3.1 SSD2 Main Success Scenario">
+  <p><b>Fig. 3:</b> Submit Memory Address - Main Success Scenario </p>
+</div>
+>>>>>>> 73d25b6 (docs(design/us-3.1 & docs/images & architecture.md): Moved us-3.1 from docs/architecture.md to docs/design. Added SSDs to us-3.1 in docs/design)
 
 ## Alternate Flow
 
@@ -176,6 +197,13 @@ User                         CacheScope
  |                                  |
  | <--- invalidAddress ------------ |
 
+<<<<<<< HEAD
+=======
+<div align='center'>
+  <img src="../images/us3.1-ssd177.png" height='400' alt="US-3.1 SSD2 Alternate Flow">
+  <p><b>Fig. 4:</b> Submit Memory Address - Alternate Flow </p>
+</div>
+>>>>>>> 73d25b6 (docs(design/us-3.1 & docs/images & architecture.md): Moved us-3.1 from docs/architecture.md to docs/design. Added SSDs to us-3.1 in docs/design)
 
 ## Failure Conditions
 * malformed address
@@ -211,6 +239,13 @@ User                         CacheScope
  |                                |
  |<--- uiUpdated -----------------|
 
+<<<<<<< HEAD
+=======
+<div align='center'>
+  <img src="../images/us3.1-ssd206.png" height='400' alt="US-3.1 SSD3 Main Success Scenario">
+  <p><b>Fig. 5:</b> Visualization Update - Main Success Scenario </p>
+</div>
+>>>>>>> 73d25b6 (docs(design/us-3.1 & docs/images & architecture.md): Moved us-3.1 from docs/architecture.md to docs/design. Added SSDs to us-3.1 in docs/design)
 
 ## Alternate Flow
 
@@ -222,6 +257,13 @@ User                         CacheScope
  |                                |
  |<--- decompositionDisplayed ----|
 
+<<<<<<< HEAD
+=======
+<div align='center'>
+  <img src="../images/us3.1-ssd225.png" height='400' alt="US-3.1 SSD3 Alternate Flow">
+  <p><b>Fig. 6:</b> Visualization Update - Alternate Flow </p>
+</div>
+>>>>>>> 73d25b6 (docs(design/us-3.1 & docs/images & architecture.md): Moved us-3.1 from docs/architecture.md to docs/design. Added SSDs to us-3.1 in docs/design)
 
 ## Failure Conditions
 * visualization unavailable
@@ -230,6 +272,7 @@ User                         CacheScope
 
 ## SSD Validation Checklist
 
+<<<<<<< HEAD
 Check	Status
 Every SSD maps to use cases	Required
 System treated as black box	Required
@@ -243,6 +286,26 @@ SSD-1 Configure Cache	US-1.1, UC-2.1–UC-2.3
 SSD-2 Submit Memory Address	US-1.2, UC-2.4–UC-2.10
 SSD-3 Visualization Update	US-1.5, UC-2.6
 Acceptance Criteria
+=======
+| Check                       | Status   |
+| :---                        | :---     |
+| Every SSD maps to use cases | Required |
+| System treated as black box | Required |
+| Internal objects excluded   | Required |
+| Actor events defined        | Required |
+| Outputs defined             | Required |
+| Alternate flows included    | Required |
+
+## Traceability Mapping
+
+| SSD                         | Source                 |
+| :---                        | :---                   |
+| SSD-1 Configure Cache       | US-1.1, UC-2.1–UC-2.3  |
+| SSD-2 Submit Memory Address | US-1.2, UC-2.4–UC-2.10 |
+| SSD-3 Visualization Update  | US-1.5, UC-2.6         |
+
+## Acceptance Criteria
+>>>>>>> 73d25b6 (docs(design/us-3.1 & docs/images & architecture.md): Moved us-3.1 from docs/architecture.md to docs/design. Added SSDs to us-3.1 in docs/design)
 * SSDs exist for major workflows.
 * Actor/system messages are defined.
 * SSDs align with use cases.
