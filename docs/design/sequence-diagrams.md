@@ -105,7 +105,7 @@ Invalid configuration:
 
 <div align='center'>
   <img src="../images/us3.1-ssd106.png" height='400' alt="US-3.1 SSD1 Alternate Scenario">
-  <p><b>Fig. 2:</b> Configure Cache - Alternate Scenario </p>
+  <p><b>Fig. 2:</b> Configure Cache - Alternate Flow (Invalid Configuration) </p>
 </div>
 
 ## Failure Conditions
@@ -151,7 +151,7 @@ Submit and process memory address through cache-resolution workflow.
 
 <div align='center'>
   <img src="../images/us3.1-ssd177.png" height='400' alt="US-3.1 SSD2 Alternate Flow">
-  <p><b>Fig. 4:</b> Submit Memory Address - Alternate Flow </p>
+  <p><b>Fig. 4:</b> Submit Memory Address - Alternate Flow (Invalid Address)</p>
 </div>
 
 ## Failure Conditions
@@ -169,12 +169,13 @@ Present translated address information visually.
 
 ## System Events
 
-Actor	System
-requestVisualization()	
-	generateVisualization()
-	renderAddressBits()
-	updateUI()
-	displayResults()
+| Actor                  | System                  |
+| :---                   | :---                    |
+| requestVisualization() |                         |
+|                        | generateVisualization() |
+|                        | renderAddressBits()     |
+|                        | updateUI()              |
+|                        | displayResults()        |
 
 ## SSD Representation
 
@@ -185,11 +186,11 @@ requestVisualization()
 
 ## Alternate Flow
 
-Educational mode:
+### Educational mode:
 
 <div align='center'>
   <img src="../images/us3.1-ssd225.png" height='400' alt="US-3.1 SSD3 Alternate Flow">
-  <p><b>Fig. 6:</b> Visualization Update - Alternate Flow </p>
+  <p><b>Fig. 6:</b> Visualization Update - Alternate Flow (Educational Mode) </p>
 </div>
 
 ## Failure Conditions
