@@ -104,7 +104,7 @@ Configure cache parameters and prepare simulation.
 Invalid configuration:
 
 <div align='center'>
-  <img src="../images/us3.1-ssd106.png" height='300' alt="US-3.1 SSD1 Alternate Scenario">
+  <img src="../images/us3.1-ssd106.png" height='200' alt="US-3.1 SSD1 Alternate Scenario">
   <p><b>Fig. 2:</b> Configure Cache - Alternate Flow (Invalid Configuration) </p>
 </div>
 
@@ -150,7 +150,7 @@ Submit and process memory address through cache-resolution workflow.
 ### Invalid address:
 
 <div align='center'>
-  <img src="../images/us3.1-ssd177.png" height='300' alt="US-3.1 SSD2 Alternate Flow">
+  <img src="../images/us3.1-ssd177.png" height='250' alt="US-3.1 SSD2 Alternate Flow">
   <p><b>Fig. 4:</b> Submit Memory Address - Alternate Flow (Invalid Address)</p>
 </div>
 
@@ -189,7 +189,7 @@ Present translated address information visually.
 ### Educational mode:
 
 <div align='center'>
-  <img src="../images/us3.1-ssd225.png" height='400' alt="US-3.1 SSD3 Alternate Flow">
+  <img src="../images/us3.1-ssd225.png" height='250' alt="US-3.1 SSD3 Alternate Flow">
   <p><b>Fig. 6:</b> Visualization Update - Alternate Flow (Educational Mode) </p>
 </div>
 
