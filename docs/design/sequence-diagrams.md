@@ -1,4 +1,4 @@
-# US-3.1 — Create System Sequence Diagrams (SSDs)
+# US-3.1: Create System Sequence Diagrams (SSDs)
 ## Overview
 Create System Sequence Diagrams (SSDs) for major CacheScope interactions to model external actor-to-system behavior before implementation begins.
 
@@ -73,7 +73,7 @@ CacheScope
 | BR-SSD-04 | SSD operations become candidate system operations. |
 | BR-SSD-05 | All SSDs must remain implementation-independent.   |
 
-## SSD-1 — Configure Cache
+## SSD-1: Configure Cache
 ### Related Use Cases
 * UC-2.1 Configure Cache
 * UC-2.2 Validate Cache Configuration
@@ -104,7 +104,7 @@ Configure cache parameters and prepare simulation.
 Invalid configuration:
 
 <div align='center'>
-  <img src="../images/us3.1-ssd106.png" height='400' alt="US-3.1 SSD1 Alternate Scenario">
+  <img src="../images/us3.1-ssd106.png" height='300' alt="US-3.1 SSD1 Alternate Scenario">
   <p><b>Fig. 2:</b> Configure Cache - Alternate Flow (Invalid Configuration) </p>
 </div>
 
@@ -114,7 +114,7 @@ Invalid configuration:
 * invalid block size
 * unsupported policy
 
-## SSD-2 — Submit Memory Address
+## SSD-2: Submit Memory Address
 Related Use Cases
 * UC-2.4 Input Memory Address
 * UC-2.5 Translate Address
@@ -141,7 +141,7 @@ Submit and process memory address through cache-resolution workflow.
 ## SSD Representation
 
 <div align='center'>
-  <img src="../images/us3.1-ssd142.png" height='400' alt="US-3.1 SSD2 Main Success Scenario">
+  <img src="../images/us3.1-ssd142.png" height='300' alt="US-3.1 SSD2 Main Success Scenario">
   <p><b>Fig. 3:</b> Submit Memory Address - Main Success Scenario </p>
 </div>
 
@@ -150,7 +150,7 @@ Submit and process memory address through cache-resolution workflow.
 ### Invalid address:
 
 <div align='center'>
-  <img src="../images/us3.1-ssd177.png" height='400' alt="US-3.1 SSD2 Alternate Flow">
+  <img src="../images/us3.1-ssd177.png" height='300' alt="US-3.1 SSD2 Alternate Flow">
   <p><b>Fig. 4:</b> Submit Memory Address - Alternate Flow (Invalid Address)</p>
 </div>
 
@@ -160,7 +160,7 @@ Submit and process memory address through cache-resolution workflow.
 * lookup failure
 * cache update failure
 
-## SSD-3 — Visualization Update
+## SSD-3: Visualization Update
 Related Use Cases
 * UC-2.6 Visualize Address Bits
 
@@ -180,7 +180,7 @@ Present translated address information visually.
 ## SSD Representation
 
 <div align='center'>
-  <img src="../images/us3.1-ssd206.png" height='400' alt="US-3.1 SSD3 Main Success Scenario">
+  <img src="../images/us3.1-ssd206.png" height='300' alt="US-3.1 SSD3 Main Success Scenario">
   <p><b>Fig. 5:</b> Visualization Update - Main Success Scenario </p>
 </div>
 
@@ -245,7 +245,7 @@ Acceptance Criteria
 
 ---
 
-# US-3.2 — Create Sequence Diagrams
+# US-3.2:  Create Sequence Diagrams
 ## Overview
 Create Sequence Diagrams to model internal object collaboration within CacheScope. These diagrams refine the SSDs by identifying participating objects, message flows, control responsibilities, and interactions between controllers, entities, and supporting services.
 
@@ -277,7 +277,7 @@ so that CacheScope implementation follows clear responsibility assignments and l
 * testing workflows
 * infrastructure concerns
 
-## SD-1 — Configure Cache
+## SD-1: Configure Cache
 #### Related Use Cases
 * UC-2.1 Configure Cache
 * UC-2.2 Validate Cache Configuration
@@ -312,7 +312,7 @@ Metrics
 | Metrics                 | Reset analytics            |
 | VisualizationController | Refresh displays           |
 
-## SD-2 — Process Memory Address
+## SD-2: Process Memory Address
 #### Related Use Cases
 * UC-2.4 Input Memory Address
 * UC-2.5 Translate Address
@@ -340,7 +340,7 @@ AddressMapper
 | AddressProcessingController | Coordinate processing |
 | AddressMapper               | Perform decomposition |
 
-## SD-3 — Cache Hit Resolution
+## SD-3: Cache Hit Resolution
 #### Related Use Cases
 * UC-2.7 Search Cache Set
 * UC-2.8 Detect Cache Hit
@@ -369,7 +369,7 @@ Metrics
 * CacheSet = Information Expert
 * ReplacementPolicy = Polymorphism
 
-## SD-4 — Cache Miss Resolution (Empty Line)
+## SD-4: Cache Miss Resolution (Empty Line)
 #### Related Use Cases
 * UC-2.9 Detect Cache Miss
 * UC-2.10 Update Cache State
@@ -390,7 +390,7 @@ Metrics
   <p><b>Fig. 4:</b> SD-4 Main Success Scenario </p>
 </div>
 
-## SD-5 — Cache Miss Resolution (Eviction Required)
+## SD-5: Cache Miss Resolution (Eviction Required)
 #### Related Use Cases
 * UC-2.9 Detect Cache Miss
 * UC-2.10 Update Cache State
@@ -440,7 +440,7 @@ CacheVisualizationView
   <p><b>Fig. 6:</b> SD-6 Main Success Scenario </p>
 </div>
 
-## Sequence Diagram → Class Mapping
+## Sequence Diagram -> Class Mapping
 
 #### Sequence Diagram	Main Classes
 
