@@ -259,16 +259,6 @@ Controller 1 ---- 1 Domain Object
 
 ## GRASP Mapping
 
-| **Principle***       | ***Class***             | ***Reason*** |
-| :---                 | :---                    | :---         |
-| Controller           | ConfigurationController |              |
-| Information Expert   | Cache                   |              |
-| Low Coupling         | AddressMapper           |              |
-| High Cohesion        | CacheSet                |              |
-| Polymorphism         | ReplacementPolicy       |              |
-| Protected Variations | LRUPolicy/FIFOPolicy    |              |
-
-
 | Principle            | Class                   | Reason                                                                                                            |
 | :---                 | :---                    | :---                                                                                                              |
 | Controller           | ConfigurationController | Acts as the first non-user interface object to receive and coordinate system events for updating system settings. |
